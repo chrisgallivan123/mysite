@@ -73,29 +73,29 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
           remarkPlugins={[remarkGfm]}
           components={{
             h1: memo(({children}) => <h1 className="text-3xl font-bold mt-12 mb-6 text-white">{children}</h1>),
-            h2: memo(({children}) => {
-              // Extract emoji and text for section images
-              const text = children?.toString() || '';
-              const emoji = text.match(/^(\p{Emoji}+)/u)?.[1] || '';
-              const cleanText = text.replace(/^\p{Emoji}+\s*/, '');
-              
-              return (
-                <div className="mt-16 mb-8">
-                  <h2 className="text-2xl font-bold mb-6 text-white">{children}</h2>
-                  {/* Section image based on emoji */}
-                  {emoji && (
-                    <div className="relative w-full h-48 mb-8 rounded-xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-center">
-                          <div className="text-6xl mb-4">{emoji}</div>
-                          <div className="text-gray-300 text-lg font-medium">{cleanText}</div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              );
-            }),
+                        h2: memo(({children}) => {
+                          // Extract emoji and text for section images
+                          const text = children?.toString() || '';
+                          const emoji = text.match(/^(\p{Emoji}+)/u)?.[1] || '';
+                          const cleanText = text.replace(/^\p{Emoji}+\s*/u, '');
+                          
+                          return (
+                            <div className="mt-16 mb-8">
+                              <h2 className="text-2xl font-bold mb-6 text-white">{children}</h2>
+                              {/* Section image based on emoji */}
+                              {emoji && (
+                                <div className="relative w-full h-48 mb-8 rounded-xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700">
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <div className="text-center">
+                                      <div className="text-6xl mb-4">{emoji}</div>
+                                      <div className="text-gray-300 text-lg font-medium">{cleanText}</div>
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          );
+                        }),
             h3: memo(({children}) => <h3 className="text-xl font-semibold mt-8 mb-3 text-white">{children}</h3>),
             p: memo(({children}) => <p className="text-gray-300 leading-relaxed mb-6">{children}</p>),
             blockquote: memo(({children}) => (
