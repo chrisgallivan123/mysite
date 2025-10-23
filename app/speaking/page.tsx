@@ -1,0 +1,17 @@
+export default function Speaking() {
+  return (
+    <div>
+      <h1 className="text-3xl font-semibold">Speaking</h1>
+      <p className="mt-4 text-neutral-300">
+        Topics: Flow Metrics and the Why, Context Annotation for 10× Insight, Agentic Pipelines for Delivery.
+      </p>
+      <div className="mt-8 grid gap-6">
+        <div className="card">
+          <h3 className="text-xl font-semibold">Context Is the Gold</h3>
+          <p className="text-neutral-300 mt-2">How a handful of tags can out-signal terabytes of delivery data.</p>
+          <a className="inline-block mt-4 underline underline-offset-4" href="https://calendly.com/">Book a session</a>
+        </div>
+      </div>
+    </div>
+  )
+}

@@ -1,0 +1,36 @@
+{
+  "name": "personal-site-starter",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbo",
+    "dev:fast": "next dev --turbo --port 3002",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "export-medium": "node scripts/export-to-medium.js",
+    "export-medium:single": "node scripts/export-to-medium.js",
+    "organize-images": "node scripts/organize-images.js",
+    "suggest-images": "node scripts/organize-images.js"
+  },
+  "dependencies": {
+    "@next/mdx": "15.0.1",
+    "clsx": "^2.1.1",
+    "gray-matter": "^4.0.3",
+    "next": "15.0.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-markdown": "^10.1.0",
+    "reading-time": "^1.5.0",
+    "remark-gfm": "^4.0.1"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.2",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.12.0",
+    "eslint-config-next": "15.0.1",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "typescript": "^5.6.3"
+  }
+}

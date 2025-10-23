@@ -1,0 +1,14 @@
+{
+  "title": "Context Is the Gold: Why Tags Beat Terabytes",
+  "subtitle": "A few tags can out-signal thousands of artifacts when they capture the why.",
+  "tags": [
+    "AI",
+    "Flow",
+    "Context"
+  ],
+  "publishStatus": "draft",
+  "content": "\nLeaders used to tour teams for the *why* behind the numbers. Now the why can sit **next to** the numbers via context annotations.\n\n### The punchline\nWhen we tag the few moments that matter—*reprioritization, dependency stalls, deadline shocks*—we compress weeks of meetings into a single glance.\n\n- Context → *why*\n- Flow metrics → *what/when*\n- Together → **10× insight density**\n\n**Try this**: Start with 5 “gold” tags (Reprioritized, Blocked-External, Scope-Surge, Non-Negotiable, Tech-Debt). Review them weekly next to SDI and high-water marks.\n",
+  "canonicalUrl": "https://your-site.com/ideas/context-is-the-gold",
+  "license": "all-rights-reserved",
+  "notifyFollowers": true
+}

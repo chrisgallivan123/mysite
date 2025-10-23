@@ -1,0 +1,14 @@
+{
+  "title": "Your Post Title Here",
+  "subtitle": "A compelling one-liner that hooks the reader and summarizes the key insight",
+  "tags": [
+    "Tag1",
+    "Tag2",
+    "Tag3"
+  ],
+  "publishStatus": "draft",
+  "content": "\n> **The Core Insight**  \n> *Your main thesis or key takeaway in one powerful sentence*\n\n---\n\n## 🔍 Section 1: Hook Your Reader\n\nStart with a compelling story, surprising statistic, or relatable problem.  \nThis is your opening hook that keeps readers engaged.\n\n### Subsection with Visual Element\n\n**Key Point:** Highlight important concepts  \n**Supporting Evidence:** Back up your claims with data or examples\n\n> ⚠️ **Important Note**  \n> Use callout boxes to emphasize critical insights\n\n---\n\n## ⚡ Section 2: Build Your Argument\n\nContinue building your case with clear, logical progression.\n\n### Visual Break\n\nAdd diagrams, charts, or images to break up text and illustrate concepts.\n\n---\n\n## 📊 Section 3: Provide Evidence\n\nSupport your arguments with:\n- **Data points** and metrics\n- **Real examples** from experience\n- **Case studies** or research\n\n---\n\n## 🎯 The Bottom Line\n\n> **🚀 Your Call to Action**  \n> **What should readers do next?**\n\n**Key Takeaways:**\n- **Takeaway 1** - Clear, actionable insight\n- **Takeaway 2** - Another valuable point\n- **Takeaway 3** - Final thought or next step\n\n---\n\n## 💡 Additional Resources\n\n- [Link to related content](https://example.com)\n- [Tool or resource](https://example.com)\n- [Follow-up reading](https://example.com)\n",
+  "canonicalUrl": "https://your-site.com/ideas/template",
+  "license": "all-rights-reserved",
+  "notifyFollowers": true
+}

@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body { @apply bg-neutral-950 text-neutral-100 antialiased; }
+.prose a { @apply text-accent underline underline-offset-4; }
+.card { @apply rounded-xl border border-neutral-800 p-6 hover:border-neutral-700 transition-colors; }
+.container { @apply max-w-5xl mx-auto px-6; }

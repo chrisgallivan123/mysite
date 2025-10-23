@@ -1,0 +1,10 @@
+---
+title: "Bottleneck Finder: SDI + High-Water Marks"
+excerpt: "Investigate longest state durations and WIP crests to find the real constraint."
+---
+
+1. Pull a 60–90 day window.
+2. Sort by **SDI (State Duration Index)** and scan the top states.
+3. Overlay **high-water marks** for WIP—watch for synchronized peaks.
+4. Trace back causes with context tags (reprioritizations, external deps, deadlines).
+5. Run a 2-week experiment to relieve the top constraint; measure delta.
