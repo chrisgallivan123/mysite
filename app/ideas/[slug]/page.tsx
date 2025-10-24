@@ -124,7 +124,7 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
                             src={src} 
                             alt={alt} 
                             {...props}
-                            className="w-[80%] h-auto mx-auto my-8 rounded-lg shadow-lg"
+                            className="w-[60%] h-auto mx-auto my-8 rounded-lg shadow-lg"
                             style={{ 
                               transform: 'translateX(-10%)',
                               filter: 'contrast(1.1) brightness(1.05) saturate(1.1)',
