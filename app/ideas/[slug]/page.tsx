@@ -134,13 +134,14 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
                   alt={alt} 
                   {...props}
                   className={isTeamImage 
-                    ? "w-48 h-auto float-right ml-6 mb-4 rounded-lg shadow-lg" 
+                    ? "w-64 h-auto float-right ml-8 mb-6 rounded-xl shadow-xl border border-gray-700" 
                     : "w-[60%] h-auto mx-auto my-8 rounded-lg shadow-lg"
                   }
                   style={{ 
                     transform: isTeamImage ? 'none' : 'translateX(-10%)',
                     filter: 'contrast(1.1) brightness(1.05) saturate(1.1)',
-                    imageRendering: 'crisp-edges'
+                    imageRendering: 'crisp-edges',
+                    maxHeight: isTeamImage ? '400px' : 'none'
                   }}
                 />
               );
