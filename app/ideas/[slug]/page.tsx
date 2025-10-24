@@ -138,7 +138,7 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
                     : "w-[60%] h-auto mx-auto my-8 rounded-lg shadow-lg"
                   }
                   style={{ 
-                    transform: isTeamImage ? 'rotate(-1deg)' : 'translateX(-10%)',
+                    transform: isTeamImage ? 'none' : 'translateX(-10%)',
                     filter: 'contrast(1.1) brightness(1.05) saturate(1.1)',
                     imageRendering: 'crisp-edges'
                   }}

@@ -12,8 +12,9 @@ body { @apply bg-neutral-950 text-neutral-100 antialiased; }
   @apply float-right ml-8 mb-6 w-80 h-auto rounded-2xl shadow-2xl border-2 border-gray-600;
   transition: transform 0.3s ease;
   shape-outside: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%);
+  vertical-align: top;
 }
 
 .magazine-image:hover {
-  transform: rotate(0deg) scale(1.02);
+  transform: scale(1.02);
 }
