@@ -1,11 +1,3 @@
----
-title: "The Missing Piece: Unlocking Meaning Through Context"
-date: "2025-01-15"
-excerpt: "Data without context is exhausting. Flow metrics show you what's happening. Context shows you why it's happening — and that's where the real learning begins."
-tags: ["AI", "Flow", "Context", "Leadership", "Data"]
-coverImage: "/context-gold.png"
----
-
 # The Missing Piece: Unlocking Meaning Through Context
 
 Before anything else, I want to credit my tireless teammate **Thomas Clendennen**, who has fought for this cause with unending dedication and a commitment to progress over personal gain.
@@ -16,33 +8,33 @@ This perspective has been forged through countless conversations, experiments, a
 ## The Core Insight
 
 Data without context is exhausting.
-Flow metrics show you what's happening.
-Context shows you why it's happening — and that's where the real learning begins.
+Flow metrics show you what’s happening.
+Context shows you why it’s happening — and that’s where the real learning begins.
 
 ---
 
-## The Team's Journey
+## The Team’s Journey
 
-When teams first see flow dashboards, there's excitement. Finally, they can *see* the work.
+When teams first see flow dashboards, there’s excitement. Finally, they can *see* the work.
 Then the questions start.
 
 "Why does that spike happen there?"
 "Why is this work type slower than the others?"
-"Does this mean we're doing worse?"
+"Does this mean we’re doing worse?"
 
 At first, the data shows *symptoms*, not *stories.*
 But over time, something shifts. The teams start digging into the why.
 
 > "We let go of three engineers last month."
-> "We were told to focus on a new priority — that other work's been superseded three times."
+> "We were told to focus on a new priority — that other work’s been superseded three times."
 > "We hit unexpected technical challenges that delayed us by two months."
 
 And sometimes the reasons are simpler:
 
-> "That data wasn't kept up to date."
-> "That work wasn't important, so we didn't worry about it."
+> "That data wasn’t kept up to date."
+> "That work wasn’t important, so we didn’t worry about it."
 
-The numbers weren't wrong — they were incomplete.
+The numbers weren’t wrong — they were incomplete.
 The missing piece was **context**.
 
 ---
@@ -61,7 +53,7 @@ Silence.
 
 Sometimes leaders expect the numbers to move faster than reality allows.
 
-> "We're two months in and I'm not seeing the flow time for features improve."
+> "We’re two months in and I’m not seeing the flow time for features improve."
 
 The irony?
 It often takes longer than two months to complete a single feature.
@@ -69,14 +61,14 @@ It often takes longer than two months to complete a single feature.
 After a few rounds of this — chasing numbers, defending charts, and watching expectations collide with reality — something predictable happens:
 
 Leaders call it quits and go back to managing without data.
-It's less frustrating.
-And in a way, they're right — because data without context burns trust.
+It’s less frustrating.
+And in a way, they’re right — because data without context burns trust.
 
 ---
 
 ## The Context Bridge
 
-Context connects what's visible in the metrics to what's real in the work.
+Context connects what’s visible in the metrics to what’s real in the work.
 
 A single tag — "architectural dependency," "scope shift," "approval delay," "deprioritized work" — tells a story a dashboard never could.
 
@@ -87,9 +79,9 @@ It explains *why* something changed, not just *that* it did.
 
 ## The AI Connection
 
-In the era of AI, context isn't optional — it's oxygen.
+In the era of AI, context isn’t optional — it’s oxygen.
 
-Large language models have limited context windows. You can't just feed them every record; you have to curate meaning.
+Large language models have limited context windows. You can’t just feed them every record; you have to curate meaning.
 Without context, AI sees noise. With it, AI sees patterns, intent, and cause.
 
 If data is the *what*, context is the *why*, and AI is the *how.*
@@ -99,8 +91,8 @@ Together they form a feedback loop that helps teams learn, adapt, and improve.
 
 ## AI as a Teammate
 
-If a new person joined your team, you'd tell them what's really happening.
-You'd explain that priorities changed, or that one project was delayed by technical issues.
+If a new person joined your team, you’d tell them what’s really happening.
+You’d explain that priorities changed, or that one project was delayed by technical issues.
 
 **AI is your new teammate.**
 It needs that same context to perform well.
@@ -114,8 +106,8 @@ When AI understands the context, it stops being a summarizer of history and beco
 
 ## The Practice in Motion
 
-We've begun embedding context directly into our flow practices.
-It's transforming how we talk about our work — but it isn't all rosy.
+We’ve begun embedding context directly into our flow practices.
+It’s transforming how we talk about our work — but it isn’t all rosy.
 
 ### Tagging for Meaning
 
@@ -124,17 +116,17 @@ We capture context tags — dependencies, delays, hygiene, shifting priorities, 
 ### Overhead vs. Leverage
 
 People worry about data-entry overhead.
-I find this ironic: we're standing still, at best, yet hesitate to add a tag that takes ten seconds.
-If ten seconds of reflection saves ten days of confusion, that's not overhead — that's leverage.
+I find this ironic: we’re standing still, at best, yet hesitate to add a tag that takes ten seconds.
+If ten seconds of reflection saves ten days of confusion, that’s not overhead — that’s leverage.
 
 ### Facing the Uncomfortable
 
 Some of the conversations that follow are uncomfortable.
 Context brings truth to light — misalignment, delays, waste, priorities that conflict.
-But that's the point.
-Data isn't supposed to make us comfortable; it's supposed to make us aware.
+But that’s the point.
+Data isn’t supposed to make us comfortable; it’s supposed to make us aware.
 
-I'm convinced the companies that survive the next few years will be those that come to terms with this uneasy reality — and face it head-on instead of avoiding the hard conversations.
+I’m convinced the companies that survive the next few years will be those that come to terms with this uneasy reality — and face it head-on instead of avoiding the hard conversations.
 
 ---
 
@@ -145,8 +137,8 @@ It was meant to *illuminate* it.
 
 When you blend the precision of measurement with the truth of human experience, you unlock sustainable change — in the right places, at the right times.
 
-That's the missing piece.
-That's the power of context.
+That’s the missing piece.
+That’s the power of context.
 
 ---
 
