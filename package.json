@@ -25,6 +25,7 @@
     "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
+    "@types/node": "^24.9.1",
     "@types/react": "19.2.2",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.12.0",
