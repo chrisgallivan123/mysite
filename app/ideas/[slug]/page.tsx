@@ -3,6 +3,7 @@ import path from 'node:path'
 import matter from 'gray-matter'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import rehypeRaw from 'rehype-raw'
 import Image from 'next/image'
 import { memo } from 'react'
 
@@ -69,9 +70,10 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
 
       {/* Content */}
       <div className="prose prose-invert prose-lg max-w-none">
-        <ReactMarkdown 
-          remarkPlugins={[remarkGfm]}
-          components={{
+                    <ReactMarkdown 
+                      remarkPlugins={[remarkGfm]}
+                      rehypePlugins={[rehypeRaw]}
+                      components={{
             h1: memo(({children}) => <h1 className="text-3xl font-bold mt-12 mb-6 text-white">{children}</h1>),
                         h2: memo(({children}) => {
                           // Extract emoji and text for section images
@@ -124,19 +126,25 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
                 {children}
               </div>
             )),
-            img: memo(({src, alt, ...props}) => (
-              <img 
-                src={src} 
-                alt={alt} 
-                {...props}
-                className="w-[60%] h-auto mx-auto my-8 rounded-lg shadow-lg"
-                style={{ 
-                  transform: 'translateX(-10%)',
-                  filter: 'contrast(1.1) brightness(1.05) saturate(1.1)',
-                  imageRendering: 'crisp-edges'
-                }}
-              />
-            )),
+            img: memo(({src, alt, ...props}) => {
+              const isTeamImage = src === '/team.png';
+              return (
+                <img 
+                  src={src} 
+                  alt={alt} 
+                  {...props}
+                  className={isTeamImage 
+                    ? "w-48 h-auto float-right ml-6 mb-4 rounded-lg shadow-lg" 
+                    : "w-[60%] h-auto mx-auto my-8 rounded-lg shadow-lg"
+                  }
+                  style={{ 
+                    transform: isTeamImage ? 'none' : 'translateX(-10%)',
+                    filter: 'contrast(1.1) brightness(1.05) saturate(1.1)',
+                    imageRendering: 'crisp-edges'
+                  }}
+                />
+              );
+            }),
           }}
         >
           {content}
