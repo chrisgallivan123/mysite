@@ -8,23 +8,12 @@ body { @apply bg-neutral-950 text-neutral-100 antialiased; }
 .container { @apply max-w-5xl mx-auto px-6; }
 
 /* Magazine-style image layout */
-.magazine-image-container {
-  @apply float-right ml-8 mb-6 max-w-sm;
-  shape-outside: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%);
-}
-
 .magazine-image {
-  @apply w-full h-auto rounded-2xl shadow-2xl border-2 border-gray-600;
-  transform: rotate(-1deg);
+  @apply float-right ml-8 mb-6 w-80 h-auto rounded-2xl shadow-2xl border-2 border-gray-600;
   transition: transform 0.3s ease;
+  shape-outside: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%);
 }
 
 .magazine-image:hover {
   transform: rotate(0deg) scale(1.02);
-}
-
-.magazine-caption {
-  @apply text-xs text-gray-400 mt-3 px-2 italic leading-relaxed;
-  font-family: 'Georgia', 'Times New Roman', serif;
-  text-align: justify;
 }
