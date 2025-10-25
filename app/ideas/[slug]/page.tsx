@@ -101,7 +101,7 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
             h3: memo(({children}) => <h3 className="text-xl font-semibold mt-8 mb-3 text-white">{children}</h3>),
             p: memo(({children}) => <p className="text-gray-300 leading-relaxed mb-6">{children}</p>),
             blockquote: memo(({children}) => (
-              <blockquote className="border-l-4 border-blue-500 pl-6 py-2 my-8 bg-gray-900/50 rounded-r-lg">
+              <blockquote className="border-l-4 border-blue-500 pl-6 py-2 my-8 bg-gray-900/50 rounded-r-lg clear-left">
                 <div className="text-gray-200 italic text-lg">{children}</div>
               </blockquote>
             )),
@@ -126,22 +126,28 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
                 {children}
               </div>
             )),
-            img: memo(({src, alt, ...props}) => {
+            img: memo(({src, alt, className, ...props}) => {
               const isTeamImage = src === '/team.png';
               const isLeaderImage = src === '/leader.png';
+              const isSmallImage = className?.includes('small-image');
+              const isMagazineLeft = className?.includes('magazine-image-left');
+              const isMagazineImage = className?.includes('magazine-image');
+              
               return (
                 <img 
                   src={src} 
                   alt={alt} 
                   {...props}
-                  className={isTeamImage 
+                  className={isTeamImage || isMagazineImage
                     ? "magazine-image" 
-                    : isLeaderImage
+                    : isLeaderImage || isMagazineLeft
                     ? "magazine-image-left"
+                    : isSmallImage
+                    ? "small-image mx-auto my-8 rounded-lg shadow-lg"
                     : "w-[60%] h-auto mx-auto my-8 rounded-lg shadow-lg"
                   }
                   style={{ 
-                    transform: (isTeamImage || isLeaderImage) ? 'none' : 'translateX(-10%)',
+                    transform: (isTeamImage || isLeaderImage || isMagazineLeft || isMagazineImage) ? 'none' : 'translateX(-10%)',
                     filter: 'contrast(1.1) brightness(1.05) saturate(1.1)',
                     imageRendering: 'crisp-edges'
                   }}

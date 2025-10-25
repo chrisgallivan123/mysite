@@ -23,10 +23,29 @@ body { @apply bg-neutral-950 text-neutral-100 antialiased; }
 .magazine-image-left {
   @apply float-left mr-8 mb-6 w-80 h-auto rounded-2xl shadow-2xl border-2 border-gray-600;
   transition: transform 0.3s ease;
-  shape-outside: polygon(15% 0, 100% 0, 100% 100%, 0 85%, 0 15%);
-  vertical-align: top;
+  shape-outside: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  vertical-align: middle;
+  margin-top: -0.5rem;
 }
 
 .magazine-image-left:hover {
   transform: scale(1.02);
+}
+
+/* Clear floats to prevent wrapping issues */
+.clear-left {
+  clear: left;
+}
+
+/* Flow text to the right of floated images */
+.flow-right {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+/* Small image styling */
+.small-image {
+  width: 300px !important;
+  height: auto !important;
+  max-width: 300px !important;
 }
