@@ -1,0 +1,55 @@
+// SIMPLE FORMATTING CODE FOR GUARD NODE
+// This does exactly what I did manually - reformats squished MDX
+// Paste this into your Guard node's JavaScript code field in n8n
+
+const data = $input.item.json;
+let mdx = '';
+
+// Get the MDX content - try common field names
+let rawContent = '';
+if (data.input_schema) {
+  rawContent = String(data.input_schema);
+} else if (data.query) {
+  rawContent = String(data.query);
+} else if (typeof data === 'string') {
+  rawContent = data;
+} else {
+  rawContent = JSON.stringify(data);
+}
+
+// Split frontmatter and body
+const parts = rawContent.match(/^(---[\s\S]*?---)\s*([\s\S]*)$/);
+if (!parts) {
+  // No frontmatter found, return as-is
+  mdx = rawContent;
+} else {
+  let frontmatter = parts[1];
+  let body = parts[2];
+  
+  // FIX FRONTMATTER: If it's all squished (no newlines after title), reformat it
+  if (frontmatter.includes('title:') && !frontmatter.includes('\ntitle:')) {
+    frontmatter = frontmatter
+      .replace(/title:\s*"([^"]+)"/, 'title: "$1"')
+      .replace(/date:\s*"([^"]+)"/, '\ndate: "$1"')
+      .replace(/excerpt:\s*"([^"]+)"?/, '\nexcerpt: "$1"')
+      .replace(/tags:\s*(\[[^\]]+\])/, '\ntags: $1')
+      .replace(/coverImage:\s*"([^"]+)"/, '\ncoverImage: "$1"');
+    
+    // Ensure it starts and ends with ---
+    if (!frontmatter.startsWith('---')) frontmatter = '---' + frontmatter;
+    if (!frontmatter.endsWith('---')) frontmatter = frontmatter + '\n---';
+  }
+  
+  // FIX BODY: Convert double spaces to newlines, add breaks around markdown elements
+  body = body.replace(/  /g, '\n');  // Double space → newline
+  body = body.replace(/([^\n])(#{1,6}\s)/g, '\n\n$2');  // Headings
+  body = body.replace(/([^\n])(---)([^\n])/g, '\n\n---\n\n');  // Horizontal rules
+  body = body.replace(/([^\n])(>\s)/g, '\n\n$2');  // Blockquotes
+  body = body.replace(/([^\n])(!\[|<img)/g, '\n\n$2');  // Images
+  body = body.replace(/\n{3,}/g, '\n\n');  // Max 2 newlines
+  
+  // Recombine
+  mdx = frontmatter + '\n\n' + body.trim();
+}
+
+return [{ json: { ...data, input_schema: mdx } }];

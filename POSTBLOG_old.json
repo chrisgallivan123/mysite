@@ -1,0 +1,166 @@
+{
+  "name": "POSTBLOG_old",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "input_schema"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "f515c35a-a6b5-4cde-8170-76ffe61ba4b1",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "owner": {
+          "__rl": true,
+          "value": "chrisgallivan123",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "mysite",
+          "mode": "list",
+          "cachedResultName": "mysite",
+          "cachedResultUrl": "https://github.com/chrisgallivan123/mysite"
+        },
+        "filePath": "=content/posts/{{$json.slug}}.mdx",
+        "fileContent": "={{ $json.fileContent }}",
+        "commitMessage": "={{ 'Auto-publish: ' + $json.title }}"
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        896,
+        0
+      ],
+      "id": "f900cb28-c2c0-4e64-88f5-fc62bda546d3",
+      "name": "Create a file",
+      "webhookId": "92e98d8b-c3ac-4654-900f-cc96a802b5ac",
+      "credentials": {
+        "githubApi": {
+          "id": "50HU5cV3UMfHL5dE",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a9ec73da-5e34-4168-8516-9f0b89789bf9",
+              "name": "webUrl",
+              "value": "={{ 'https://github.com/chrisgallivan123/mysite/blob/main/content/posts/' + $json.slug + '.mdx' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1120,
+        0
+      ],
+      "id": "4c370953-e903-4b07-bf64-7740bc632ebb",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Name: Extract Title + Slug + MDX (robust)\n// Input: items[0].json.input_schema (string)\n// Output: title, slug, fileContent\n\nconst item = items[0].json;\nconst mdx = String(item.input_schema || '');\n\nfunction findTitleFromFrontmatter(text) {\n  // Grab the first frontmatter block (single or multi-line)\n  const fm = text.match(/---\\s*([\\s\\S]*?)\\s*---/);\n  if (!fm) return null;\n  const body = fm[1];\n\n  // Look for title: \"...\"\n  // Works whether title is on same line as '---' or later lines.\n  const mQuoted = body.match(/(?:^|\\s)title:\\s*\"(.*?)\"/i) || body.match(/(?:^|\\s)title:\\s*'(.*?)'/i);\n  if (mQuoted && mQuoted[1]) return mQuoted[1].trim();\n\n  // Unquoted (less common)\n  const mBare = body.match(/(?:^|\\s)title:\\s*([^\\n\\r]+)\\s*$/im);\n  if (mBare && mBare[1]) return mBare[1].trim();\n\n  return null;\n}\n\nfunction findTitleFromH1(text) {\n  const h1 = text.match(/^#\\s+(.+?)\\s*$/m);\n  return h1 ? h1[1].trim() : null;\n}\n\nfunction slugify(s) {\n  return s\n    .normalize('NFKD')                   // fold accents\n    .replace(/[\\u0300-\\u036f]/g, '')     // remove diacritics\n    .toLowerCase()\n    .replace(/[^a-z0-9]+/g, '-')         // non-alnum → dash\n    .replace(/^-+|-+$/g, '');            // trim dashes\n}\n\nlet title = findTitleFromFrontmatter(mdx) || findTitleFromH1(mdx) || 'untitled';\nconst slug = slugify(title) || 'untitled';\n\nreturn [{\n  json: {\n    ...item,\n    title,\n    slug,\n    fileContent: mdx\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        672,
+        0
+      ],
+      "id": "757ee5dc-7ff2-4f79-81a5-5e903db29017",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Guard & Normalize (string in, string out)\nconst mdx =\n  String(\n    $json.input_schema\n    ?? $json.query?.body_mdx\n    ?? $json.query?.mdx\n    ?? $json.query?.html\n    ?? $json.mdx\n    ?? $json.html\n    ?? ''\n  ).trim();\n\nif (!mdx) throw new Error('POSTBLOG: input_schema is EMPTY (fix mapping in caller).');\n\nreturn [{ json: { ...$json, input_schema: mdx } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "59e427fb-e606-438e-a0bd-4259ea1cbcfe",
+      "name": "Guard"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Guard",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a file": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Create a file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guard": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "20bc97a1-a9ba-4198-bc60-acc1b45ff30e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4d09beae58bf58ca12a79f1e639a6b3111e0f8c6534a92d11a420f807d4f5ecc"
+  },
+  "id": "SOfro3ag290G504g",
+  "tags": []
+}

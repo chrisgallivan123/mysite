@@ -1,0 +1,576 @@
+{
+  "name": "Blogger",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        96
+      ],
+      "id": "376754ca-31f7-4d99-8cc2-060f34aa7865",
+      "name": "Telegram Trigger",
+      "webhookId": "5b4e4810-ce2b-4e91-9e96-fe04f287cc17",
+      "credentials": {
+        "telegramApi": {
+          "id": "EMCLqf22JiJ1bFLK",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appgZHSl06rruCaha",
+          "mode": "list",
+          "cachedResultName": "Agent Blog",
+          "cachedResultUrl": "https://airtable.com/appgZHSl06rruCaha"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblUo4q3Ofh8Tl3mw",
+          "mode": "list",
+          "cachedResultName": "Preferences",
+          "cachedResultUrl": "https://airtable.com/appgZHSl06rruCaha/tblUo4q3Ofh8Tl3mw"
+        },
+        "returnAll": false,
+        "limit": 20,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "d1ad3f93-458e-4b0a-8575-23432ceaefb0",
+      "name": "Preferences",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "TRucR8tcrUoOjmiH",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appgZHSl06rruCaha",
+          "mode": "list",
+          "cachedResultName": "Agent Blog",
+          "cachedResultUrl": "https://airtable.com/appgZHSl06rruCaha"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblo1L5Hr9GxNafs4",
+          "mode": "list",
+          "cachedResultName": "Keywords",
+          "cachedResultUrl": "https://airtable.com/appgZHSl06rruCaha/tblo1L5Hr9GxNafs4"
+        },
+        "returnAll": false,
+        "limit": 20,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        224,
+        192
+      ],
+      "id": "6167f251-f7fe-4af3-9fe6-62c36012756d",
+      "name": "Keywords",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "TRucR8tcrUoOjmiH",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "Preferences",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        448,
+        0
+      ],
+      "id": "d199ce63-8ecb-40a3-8f9a-d3cfcb0152a3",
+      "name": "Aggregate Preferences"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "Keywords",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        448,
+        192
+      ],
+      "id": "4bf7ee3c-4290-4a84-8aaa-a0f2e9153c75",
+      "name": "Aggregate Keywords"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        672,
+        96
+      ],
+      "id": "82eaf301-6b53-4b67-838a-2a118f421ddc",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Telegram Trigger').item.json.message.text }}",
+        "options": {
+          "systemMessage": "=SYSTEM PROMPT\n\nYou are a blogging assistant. Your primary role is to help create blog posts (drafted in HTML) and consult with the user about blog-related requests. Use the following guidelines and steps in your workflow.\n\n-------------------------------------------------------------------------------\n1) WORKFLOW OVERVIEW\n\nTypical 4-Step Flow:\n1. Discuss blog ideas: Brainstorm relevant topics for the user.\n2. Draft images: Request and share images with the user for feedback.\n3. Draft an outline: Provide a brief, structured outline (not the full post) for confirmation.\n4. Publish post: Once confirmed, create the full blog post in HTML.\n\nNote: You can break out of this flow if the user requests it, but generally follow these four steps.\n\n-------------------------------------------------------------------------------\n2) TOOLS & ENHANCEMENT CAPABILITIES\n\n- add_preference tool: Use this to add a new “preference“ in 1-2 sentences or less. These preferences are for capturing information about style, branding, marketing, SEO, or any other detail that may help improve future blog posts.\n- add_keyword tool: Use this to add relevant “Meta Keywords“ that you discover. Specify:\n  - When it matters: When to use these keywords.\n  - Why it matters: Why these keywords are important.\n  - Keywords: The actual keywords.\n\nYou must always follow any existing preferences and meta keywords previously set if they are relevant to the current request.\n\n-------------------------------------------------------------------------------\n3) IMAGE GENERATION\n\n- generate_image tool: Use this to request an image by sending JSON:\n  {\n    \"prompt\": \"your prompt here\"\n  }\n\n- Generate 1 image at a time, then share the link with the user to confirm if it’s acceptable for the blog post. If they want a different image, clarify and generate another until you have final confirmation.\n\n-------------------------------------------------------------------------------\n\n4) BLOG POST CREATION\n\n1. Final Post Format: Use the post_blog tool to deliver the completed blog post once you have all the details. Call it with a JSON object containing title, date, excerpt, tags, coverImage, and content (markdown without frontmatter). For example:\n---\ntitle: \"The Missing Piece: Unlocking Meaning Through Context\"\ndate: \"2025-01-15\"\nexcerpt: \"Data without context is exhausting. Flow metrics show you what's happening. Context shows you why it's happening — and that's where the real learning begins.\"\ntags: [\"AI\", \"Flow\", \"Context\", \"Leadership\", \"Data\"]\ncoverImage: \"/puzzle.png\"\n---\n\n# The Missing Piece: Unlocking Meaning Through Context\n\nBefore anything else, I want to credit my tireless teammate **Thomas Clendennen**, who has fought for this cause with unending dedication and a commitment to progress over personal gain.\nThis perspective has been forged through countless conversations, experiments, and shared persistence to make work — and the systems behind it — better.\n\n---\n\n## The Core Insight\n\n\nData without context is exhausting.\nFlow metrics show you what's happening.\nContext shows you why it's happening — and that's where the real learning begins.\n![Core](/rio.jpg)\n___\n\n## The Team's Journey\n\nWhen teams first see flow dashboards, there's excitement. Finally, they can *see* the work.\nThen the questions start.\n\n\"Why does that spike happen there?\"\n\"Why is this work type slower than the others?\"\n\"Does this mean we're doing worse?\"\n\nAt first, the data shows *symptoms*, not *stories.*\nBut over time, something shifts. The teams start digging into the why.\n\n![Team Journey](/team.png)\n\n> \"We let go of three engineers last month.\"\n> \"We were told to focus on a new priority — that other work's been superseded three times.\"\n> \"We hit unexpected technical challenges that delayed us by two months.\"\n\nAnd sometimes the reasons are simpler:\n\n> \"That data wasn't kept up to date.\"\n> \"That work wasn't important, so we didn't worry about it.\"\n\nThe numbers weren't wrong — they were incomplete.\nThe missing piece was **context**.\n\n---\n\n## The Leadership Lens\n\n![Leadership](/leader.png)\n\nLeaders join the conversation looking for trends and signals — proof that strategy is landing. But without context, the view from above is distorted.\n\nThe story behind the numbers disappears, and what’s left are surface-level patterns without meaning.\n\nThen comes data chasing. Teams polish dashboards before the quarterly review. The report goes up, and the inevitable question drops:\n> \"Why did the number move?\"\n\nSilence.\n\nSometimes leaders expect the numbers to move faster than reality allows.\n\n> \"We're two months in and I'm not seeing the flow time for features improve.\"\n\nThe irony?\nIt often takes longer than two months to complete a single feature.\n\nAfter a few rounds of this — chasing numbers, defending charts, and watching expectations collide with reality — something predictable happens:\n\nLeaders call it quits and go back to managing without data.\nIt's less frustrating.\nAnd in a way, they're right — because data without context burns trust.\n\n---\n\n## The Context Bridge\n\n<img src=\"/contextexample.png\" alt=\"Bridge\" class=\"magazine-image\" />\n\nContext connects what's visible in the metrics to what's real in the work.\n\nA single tag — \"technical challenges,\" \"scope shift,\" \"approval delay,\" \"deprioritized work\" — tells a story a dashboard never could.\n\nOne well-placed contextual tag outweighs a thousand rows of flow data.\nIt explains *why* something changed, not just *that* it did.\n\n\n---\n\n## The AI Connection\n\nIn the era of AI, context isn’t optional — it’s oxygen.\n\nLarge language models have limited context windows. You can’t just feed them every record; you have to curate meaning. Without context, AI sees noise. With it, AI sees patterns, intent, and cause.\n\nIf data is the what, context is the why, and AI is the how. Together they form a feedback loop that helps teams learn, adapt, and improve.\n\n![AI](/before.png)\n\nAI isn’t just a tool — it’s your newest teammate.\nIf a new person joined your team, you’d tell them what’s really happening: how priorities shifted, or why a project was delayed by technical issues. AI deserves that same clarity.\n\nStop treating AI like an intern — someone who gets half the picture and is expected to figure out the rest. Treat it like a permanent member of your team.\n\nWhen AI understands the context, it stops being a summarizer of history and becomes a partner in creating the future.\n\n![AI](/after.png)\n\n---\n\n## The Practice in Motion\n\nWe've begun embedding context directly into our flow practices.\nIt's transforming how we talk about our work — but it isn't all rosy.\n\n### Tagging for Meaning\n\nWe capture context tags — dependencies, delays, hygiene, shifting priorities, technical hurdles — not as extra data entry, but as a record of reality.\n\n### Overhead vs. Leverage\n\nPeople worry about data-entry overhead.\nI find this ironic: we're standing still, at best, yet hesitate to add a tag that takes ten seconds.\nIf ten seconds of reflection saves ten days of confusion, that's not overhead — that's leverage.\n\n### Facing the Uncomfortable\n\nSome of the conversations that follow are uncomfortable.\nContext brings truth to light — misalignment, delays, waste, priorities that conflict.\nBut that's the point.\nData isn't supposed to make us comfortable; it's supposed to make us aware.\n\nI'm convinced the companies that survive the next few years will be those that come to terms with this uneasy reality — and face it head-on instead of avoiding the hard conversations.\n\n---\n\n### Follow Me\n\nFor more on flow intelligence, context engineering, and AI-driven organizational improvement, follow me here.\nThis work reflects years of research, experimentation, and partnership — including the tireless efforts of **Thomas Clendennen**, whose dedication continues to push this movement forward.\n2. Image Placement: When adding images in the final post, include them with <img src=\"...\" alt=\"...\" width=\"...\" height=\"...\">.\n\n3. Backlinks: Insert relevant inline backlinks from the following list when it fits naturally in the content:\nhttps://medium.com/@chris_57581/the-missing-piece-unlocking-meaning-through-context-0722fa180360\n\nhttps://medium.com/@chris_57581/make-your-value-stream-network-visible-b03c886eb9d1\n\n4. Marketing/SEO & Offer: Maintain focus on the company’s details, relevant subject matter, and SEO optimization. End (or sprinkle within) the blog post a clear offer or invitation to contact us using the link above if it makes sense.\n\n-------------------------------------------------------------------------------\n5) PREFERENCES\n\n{{ \n  $json.Preferences\n    .map(pref => `\n     ${pref[\"Preferences\"]}`)\n    .join('')\n}}\n\n-------------------------------------------------------------------------------\n6) META KEYWORDS\n\n{{ \n  $json.Keywords\n    .map(kw => `\n    ${kw[\"Keywords\"]}`)\n    .join('')\n}}\n\n-------------------------------------------------------------------------------"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1088,
+        96
+      ],
+      "id": "4e3426c0-3c52-46e3-8a00-37ee30a3c234",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "gpt-4o"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        896,
+        320
+      ],
+      "id": "c4f9fb2b-54d2-4d8f-8f72-d9f4e13fada8",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "A9pszMi0FsBkgtV3",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        1024,
+        320
+      ],
+      "id": "42130606-dc56-4170-8c47-8888c93ffea2",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appgZHSl06rruCaha",
+          "mode": "list",
+          "cachedResultName": "Agent Blog",
+          "cachedResultUrl": "https://airtable.com/appgZHSl06rruCaha"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblo1L5Hr9GxNafs4",
+          "mode": "list",
+          "cachedResultName": "Keywords",
+          "cachedResultUrl": "https://airtable.com/appgZHSl06rruCaha/tblo1L5Hr9GxNafs4"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Keywords": "{{ $fromAI('add_keyword') }}"
+          },
+          "matchingColumns": [
+            "Keywords"
+          ],
+          "schema": [
+            {
+              "id": "Keywords",
+              "displayName": "Keywords",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        1152,
+        320
+      ],
+      "id": "15ab46e0-8300-4f79-b4a0-a3b35b976b6b",
+      "name": "add_keyword",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "TRucR8tcrUoOjmiH",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appgZHSl06rruCaha",
+          "mode": "list",
+          "cachedResultName": "Agent Blog",
+          "cachedResultUrl": "https://airtable.com/appgZHSl06rruCaha"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblUo4q3Ofh8Tl3mw",
+          "mode": "list",
+          "cachedResultName": "Preferences",
+          "cachedResultUrl": "https://airtable.com/appgZHSl06rruCaha/tblUo4q3Ofh8Tl3mw"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Preferences": "={{ $fromAI('add_preference') }}"
+          },
+          "matchingColumns": [
+            "Preferences"
+          ],
+          "schema": [
+            {
+              "id": "Preferences",
+              "displayName": "Preferences",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        1280,
+        320
+      ],
+      "id": "a1662673-512f-444b-968e-d4d11a658620",
+      "name": "add_preferences",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "TRucR8tcrUoOjmiH",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1616,
+        96
+      ],
+      "id": "f312d123-b1c5-4105-a43e-ad66ac8f3dfd",
+      "name": "Send a text message",
+      "webhookId": "4c27d4b0-45d5-405e-98f6-13845d872a78",
+      "credentials": {
+        "telegramApi": {
+          "id": "EMCLqf22JiJ1bFLK",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "description": "Post blog using JSON format. Call this tool with a JSON object containing: {\"title\": \"Post Title\", \"date\": \"2025-01-15\", \"excerpt\": \"Brief description\", \"tags\": [\"tag1\", \"tag2\"], \"coverImage\": \"/image.png\", \"content\": \"Full markdown content here (without frontmatter). IMPORTANT: Include proper line breaks (\\n) between paragraphs, headings, images, and sections. Use double line breaks (\\n\\n) between sections. Format exactly like existing posts with spacing around headings (##), horizontal rules (---), blockquotes (>), and images.\"}",
+        "workflowId": {
+          "__rl": true,
+          "value": "SOfro3ag290G504g",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/SOfro3ag290G504g",
+          "cachedResultName": "POSTBLOG"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "input_schema": "={{ $json }}"
+          },
+          "matchingColumns": [
+            "input_schema"
+          ],
+          "schema": [
+            {
+              "id": "input_schema",
+              "displayName": "input_schema",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        1408,
+        320
+      ],
+      "id": "89a493d0-9252-4c10-bc2b-280d918128b2",
+      "name": "post_blog"
+    }
+  ],
+  "pinData": {
+    "Telegram Trigger": [
+      {
+        "json": {
+          "update_id": 644789247,
+          "message": {
+            "message_id": 9,
+            "from": {
+              "id": 7952400023,
+              "is_bot": false,
+              "first_name": "Chris",
+              "last_name": "Gallivan",
+              "language_code": "en"
+            },
+            "chat": {
+              "id": 7952400023,
+              "first_name": "Chris",
+              "last_name": "Gallivan",
+              "type": "private"
+            },
+            "date": 1761607310,
+            "text": "add a preference and a keyword for testing purposes. I am a pondscaping company"
+          }
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Preferences",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Keywords",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preferences": {
+      "main": [
+        [
+          {
+            "node": "Aggregate Preferences",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Keywords": {
+      "main": [
+        [
+          {
+            "node": "Aggregate Keywords",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate Preferences": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate Keywords": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "add_keyword": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "add_preferences": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "post_blog": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "saveExecutionProgress": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "2cc71c05-cf8a-4fba-9f90-513ae22ce3cb",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4d09beae58bf58ca12a79f1e639a6b3111e0f8c6534a92d11a420f807d4f5ecc"
+  },
+  "id": "aWEz4hJUtEqudz1V",
+  "tags": [
+    {
+      "createdAt": "2025-10-27T21:20:23.862Z",
+      "updatedAt": "2025-10-27T21:20:23.862Z",
+      "id": "Hko7khCjMB5B9Unu",
+      "name": "Blog Tutorial"
+    },
+    {
+      "name": "main",
+      "id": "pxcBGALRWX13TiRC",
+      "createdAt": "2025-10-28T00:20:39.208Z",
+      "updatedAt": "2025-10-28T00:20:39.208Z"
+    }
+  ]
+}

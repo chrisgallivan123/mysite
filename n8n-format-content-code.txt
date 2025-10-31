@@ -1,0 +1,63 @@
+// Format MDX Content - Add this as a Code node in POSTBLOG-2
+// Place it AFTER "Code in JavaScript" node, BEFORE "Create a file" node
+// Input: fileContent from previous node
+// Output: formatted fileContent with proper line breaks
+
+const item = $input.item.json;
+let content = String(item.fileContent || '');
+
+// Split frontmatter and body
+const frontmatterMatch = content.match(/^(---[\s\S]*?---)\s*([\s\S]*)$/);
+if (!frontmatterMatch) {
+  // No frontmatter, return as-is
+  return [{ json: item }];
+}
+
+let frontmatter = frontmatterMatch[1];
+let body = frontmatterMatch[2];
+
+// FIX FRONTMATTER - Format it properly if it's all on one line
+if (frontmatter.includes('title:') && !frontmatter.includes('\ntitle:')) {
+  // Frontmatter is squished, reformat it
+  frontmatter = frontmatter
+    .replace(/title:\s*"([^"]+)"/g, 'title: "$1"')
+    .replace(/date:\s*"([^"]+)"/g, '\ndate: "$1"')
+    .replace(/excerpt:\s*"([^"]+)"/g, '\nexcerpt: "$1"')
+    .replace(/tags:\s*(\[[^\]]+\])/g, '\ntags: $1')
+    .replace(/coverImage:\s*"([^"]+)"/g, '\ncoverImage: "$1"');
+  // Ensure it starts with --- and ends with ---
+  if (!frontmatter.startsWith('---')) frontmatter = '---' + frontmatter;
+  if (!frontmatter.endsWith('---')) frontmatter = frontmatter + '\n---';
+}
+
+// FIX BODY - Replace double spaces with line breaks
+body = body.replace(/  /g, '\n');
+
+// Ensure line breaks before headings
+body = body.replace(/([^\n])(\n*)(#{1,6}\s)/g, '\n\n$3');
+
+// Ensure line breaks around horizontal rules
+body = body.replace(/([^\n])(\s*---\s*)([^\n])/g, '\n\n---\n\n');
+
+// Ensure line breaks before blockquotes
+body = body.replace(/([^\n])(\n*)(>\s)/g, '\n\n$3');
+
+// Ensure line breaks before images (both markdown and HTML)
+body = body.replace(/([^\n])(\n*)(!\[|<img)/g, '\n\n$3');
+
+// Ensure line breaks after images
+body = body.replace(/(\]\([^)]+\)|alt="[^"]*"\s*\/?>)(\n*)([^\n])/g, '$1\n\n$3');
+
+// Clean up: max 2 consecutive newlines
+body = body.replace(/\n{3,}/g, '\n\n');
+
+// Trim and rebuild with proper spacing
+const formattedContent = frontmatter + '\n\n' + body.trim();
+
+return [{
+  json: {
+    ...item,
+    fileContent: formattedContent
+  }
+}];
+
