@@ -7,6 +7,11 @@ export default function Speaking() {
       </p>
       <div className="mt-8 grid gap-6">
         <div className="card">
+          <h3 className="text-xl font-semibold">Are We Structured for Flow?</h3>
+          <p className="text-neutral-300 mt-2">Using graph theory and community detection algorithms to make your organizational structure visible.</p>
+          <a className="inline-block mt-4 underline underline-offset-4" href="https://calendly.com/">Book a session</a>
+        </div>
+        <div className="card">
           <h3 className="text-xl font-semibold">Making Flow Concepts Real</h3>
           <p className="text-neutral-300 mt-2">Understanding bottlenecks, capacity, and Little's Law isn't just academic theory—it's the key to unlocking system performance. Today, we'll build intuition for these concepts and explore what AI actually changes in your development workflow.</p>
           <a className="inline-block mt-4 underline underline-offset-4" href="https://calendly.com/">Book a session</a>
