@@ -1,0 +1,73 @@
+---
+title: "Flow Type Corrector"
+excerpt: "LLM-powered n8n workflow that detects and corrects misclassified work items in Flow Framework® datasets. Surfaced ~25% misclassification rate in production testing, significantly improving Flow Metrics clarity."
+coverImage: "/flow-type-corrector.png"
+---
+
+# 🧠 Flow Type Corrector
+
+The **Flow Type Corrector** uses a Large Language Model to inspect work items and detect when a Flow Item Type has been applied incorrectly. It then recommends corrections based on Flow Framework® best practices. This tool validates existing classifications rather than assigning types from scratch—surfacing misclassifications for human review.
+
+## Real-World Impact
+
+In early testing across multiple Flow Framework® datasets, this approach detected **~25% misclassified Flow Item Types**. Correcting these misapplications significantly improved the clarity of Flow Metrics and supported better decision-making during Flow Reviews.
+
+## Key Features
+
+- **Misclassification Detection**: Identifies incorrectly applied Flow Item Types through LLM-based textual analysis
+- **11-Stage Validation Pipeline**: Sophisticated n8n workflow with chunking, validation, and statistical tracking
+- **Batch Processing**: Efficiently processes hundreds of work items with configurable chunk sizes
+- **Confidence Scoring**: Provides transparency on suggestion certainty for human review
+- **Viz-Turbo Integration**: Outputs formatted for immediate visualization and analysis
+- **Human-in-the-Loop**: Designed for review, not automatic updates—ensures quality control
+
+## How It Works
+
+The workflow implements a production-grade validation pipeline:
+
+1. **Webhook Input** → Receives work items via HTTP
+2. **Extract from File** → Parses CSV/JSON input data
+3. **Chunker** → Batches work items for optimal LLM performance
+4. **Before Stats** → Captures initial classification state
+5. **AI Agent + OpenAI** → LLM-powered misclassification detection
+6. **Merge** → Combines results with original data
+7. **Apply Corrections** → Formats suggested corrections
+8. **Schema Enforcer** → Validates output structure
+9. **After Stats** → Tracks changes and confidence scores
+10. **Convert to File** → Exports results in viz-turbo format
+11. **Respond to Webhook** → Returns structured JSON response
+
+## Why This Experiment Was Valuable
+
+Building this tool provided practical insights into key LLM configuration tradeoffs:
+
+- **Batch Size**: Impact on throughput and consistency of outputs
+- **Temperature**: Determinism vs. creativity for classification tasks
+- **Accuracy vs. Performance**: Balancing speed, cost, and quality
+- **Deterministic Response Tuning**: Ensuring repeatable, reviewable recommendations
+- **Prompt Engineering**: Optimal patterns for validation-style workloads
+
+These learnings are applicable to any LLM-based validation or classification system.
+
+## Tech Stack
+
+- **n8n**: Workflow automation and orchestration
+- **OpenAI GPT-4**: LLM-powered text analysis
+- **Python 3.8+**: Scripting and evaluation tools
+- **GitHub Actions**: CI/CD pipeline
+- **Flow Framework®**: Methodology and taxonomy
+
+## Intended Usage
+
+This tool is ideal for:
+
+- Improving Flow Metric reliability through cleaner data
+- Pre-analysis data quality checks before Flow Reviews
+- Coaching teams on appropriate Flow Item Type usage
+- Preparing datasets for Viz-Turbo visualization
+- Periodic validation of Flow Item Type consistency
+
+## 🔗 Repository
+
+Visit the [GitHub repository](https://github.com/chrisgallivan123/flow-type-corrector) for source code, documentation, installation instructions, and the complete n8n workflow JSON.
+
