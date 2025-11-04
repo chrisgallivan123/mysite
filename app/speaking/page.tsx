@@ -7,6 +7,11 @@ export default function Speaking() {
       </p>
       <div className="mt-8 grid gap-6">
         <div className="card">
+          <h3 className="text-xl font-semibold">Investing in Quality - One Metric to Rule them All</h3>
+          <p className="text-neutral-300 mt-2">How all the work you do competes for the same capacity. You only have so many chips. Choose your chips wisely.</p>
+          <a className="inline-block mt-4 underline underline-offset-4" href="https://calendly.com/">Book a session</a>
+        </div>
+        <div className="card">
           <h3 className="text-xl font-semibold">Are We Structured for Flow?</h3>
           <p className="text-neutral-300 mt-2">Using graph theory and community detection algorithms to make your organizational structure visible.</p>
           <a className="inline-block mt-4 underline underline-offset-4" href="https://calendly.com/">Book a session</a>
