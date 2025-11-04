@@ -3,7 +3,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Chris Gallivan — AI-First Value Architect',
-  description: 'Building agentic systems that understand flow. Essays, frameworks, and case studies on AI-driven delivery intelligence.'
+  description: 'Building agentic systems that understand flow. Essays, frameworks, and projects on AI-driven delivery intelligence.'
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -14,7 +14,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <a href="/" className="font-semibold tracking-tight">Chris Gallivan — AI-First Value Architect</a>
                   <nav className="flex gap-6 text-sm text-neutral-300">
                     <a href="/ideas">Ideas</a>
-                    <a href="/case-studies">Case Studies</a>
                     <a href="/frameworks">Approaches</a>
                     <a href="/projects">Projects</a>
                     <a href="/speaking">Speaking</a>
