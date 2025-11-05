@@ -7,8 +7,8 @@ export default function Speaking() {
       </p>
       <div className="mt-8 grid gap-6">
         <div className="card">
-          <h3 className="text-xl font-semibold">Investing in Quality - One Metric to Rule them All</h3>
-          <p className="text-neutral-300 mt-2">How all the work you do competes for the same capacity. You only have so many chips. Choose your chips wisely.</p>
+          <h3 className="text-xl font-semibold">Context Is the Gold</h3>
+          <p className="text-neutral-300 mt-2">How a handful of tags can out-signal terabytes of delivery data.</p>
           <a className="inline-block mt-4 underline underline-offset-4" href="https://outlook.office.com/book/ChrisGallivanAvailability@planview.com/?ismsaljsauthenabled">Book a session</a>
         </div>
         <div className="card">
@@ -22,8 +22,8 @@ export default function Speaking() {
           <a className="inline-block mt-4 underline underline-offset-4" href="https://outlook.office.com/book/ChrisGallivanAvailability@planview.com/?ismsaljsauthenabled">Book a session</a>
         </div>
         <div className="card">
-          <h3 className="text-xl font-semibold">Context Is the Gold</h3>
-          <p className="text-neutral-300 mt-2">How a handful of tags can out-signal terabytes of delivery data.</p>
+          <h3 className="text-xl font-semibold">Investing in Quality - One Metric to Rule them All</h3>
+          <p className="text-neutral-300 mt-2">How all the work you do competes for the same capacity. You only have so many chips. Choose your chips wisely.</p>
           <a className="inline-block mt-4 underline underline-offset-4" href="https://outlook.office.com/book/ChrisGallivanAvailability@planview.com/?ismsaljsauthenabled">Book a session</a>
         </div>
       </div>

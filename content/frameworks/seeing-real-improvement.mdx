@@ -1,0 +1,232 @@
+---
+title: "Seeing Real Improvement: Why Single Measures Lie and How Shift Functions Reveal the Truth"
+date: "2025-11-05"
+excerpt: "A framework for detecting genuine performance changes when gut feel says one thing and your median says another—and why most improvement claims are invisible or misleading."
+tags: ["AI", "Approach", "Flow", "Statistics", "Decision Making"]
+coverImage: "/shift.png"
+---
+
+# Why this matters
+
+You can't manage what you can't see. And most teams can't actually see whether they've improved.
+
+We run businesses on gut feel because, for years, that's all we had. Someone asks "Are we faster than last quarter?" and we answer based on recent memory, frustration levels, or whatever anecdote comes to mind first. When we finally get data—flow time medians, velocity charts, cycle time dashboards—we think we've escaped gut feel. But here's the trap: **single measures lie just as often as gut feel does**.
+
+The median tells you the typical item got faster. But what if only easy work got faster, while your riskiest items got worse? What if the tail exploded but the median barely moved? What if you celebrated a 20% median improvement while quietly introducing a new bottleneck that won't show up for months?
+
+This isn't hypothetical. This is how most "improvement" initiatives fail. Teams make changes, see the median drop, declare victory—then six months later wonder why customers are still frustrated, why high-priority work still takes forever, why the system still feels fragile.
+
+The problem isn't the data. The problem is **we're asking the data one question when we should be asking nine.**
+
+---
+
+# The core model
+
+Improvement isn't binary. It's **distributional**. Work doesn't move uniformly—fast items behave differently than slow items, and typical items behave differently than problem items. When you make a change, you need to see where the change happened and who benefited.
+
+The **shift function** is a framework for seeing improvement honestly. Instead of summarizing performance with one number (median, mean), it plots **the difference at every percentile** (P10, P20, P30... P90). It transforms "did we improve?" into a diagnosis of **where** improvement happened and **what risks** emerged.
+
+## The Three Questions
+
+Every improvement claim should answer three questions:
+
+**1. Did fast items get faster?** (P10–P30)
+
+This is where most improvements show up first. Fast items are predictable, small, well-understood. If they didn't improve, your change probably didn't work—or only worked for hard cases.
+
+**2. Did typical items get faster?** (P40–P60)
+
+This is what the median tells you. But the median alone is blind to asymmetry. It can drop while the tail explodes. Always check P40, P50, and P60 separately.
+
+**3. Did problem items get faster?** (P70–P90)
+
+This is the question most teams never ask. The tail represents your bottlenecks, your high-risk work, your delivery failures. If the tail didn't improve—or got worse—you didn't solve the problem that matters most. You just sped up easy work.
+
+## Why Distributions Shift Unevenly
+
+Performance isn't a monolith. Different work experiences different constraints:
+
+- **Fast items** (P10–P30): Usually small, clear, unblocked. They benefit from process improvements, automation, better tooling.
+- **Typical items** (P40–P60): Representative of "normal" work. They benefit from capacity increases, WIP limits, better prioritization.
+- **Problem items** (P70–P90): Complex, blocked, high-variability. They benefit from bottleneck removal, dependency management, escalation paths.
+
+When you make a change, it affects these groups differently. A "fast-track" process might speed up easy work but create a two-tier system where complex work languishes. A WIP limit might compress the tail but barely touch the median. You can't see this with one number. You need the whole distribution.
+
+---
+
+# How to use it (fast path)
+
+This framework isn't about complicated statistics—it's about asking better questions. Use it when you're evaluating any improvement claim, when your gut feel disagrees with your metrics, or when you need to decide whether a change actually worked.
+
+**1) Define your cohorts**
+
+Before vs After. What two periods are you comparing?
+
+Be specific about time boundaries. "Before the change" means what dates? "After the change" means what dates? Avoid overlap. Avoid cherry-picking. If you're comparing year-over-year, use the same seasonal window (e.g., May–Aug 2023 vs May–Aug 2024) to control for calendar effects.
+
+**2) Plot the shift function**
+
+For each percentile (P10, P20... P90), calculate: After − Before
+
+This is your shift function. Each point shows how much that percentile changed. Negative values mean improvement (faster). Positive values mean regression (slower). The shape of the curve tells you what happened.
+
+**3) Look for patterns**
+
+Four scenarios reveal what's really happening:
+
+**Scenario A: "We improved, but only the fast items got faster"**
+- P10–P30: -5 to -8 days (big improvement)
+- P50: -2 days (modest improvement)
+- P80–P90: +1 to +3 days (regression)
+
+**Diagnosis**: Your change helped easy work but hurt hard work. Maybe you added a "fast-track" process that pulled resources away from complex items. The median looks good, but you've created a bottleneck at the tail.
+
+**Scenario B: "We fixed the tail"**
+- P10–P50: -0.5 to -1 day (slight improvement)
+- P60–P70: -2 to -3 days (moderate improvement)
+- P80–P90: -8 to -12 days (massive improvement)
+
+**Diagnosis**: You attacked the bottleneck. The median barely moved because most items were already fine, but you cut weeks off your riskiest work. This is a huge win that the median alone would understate.
+
+**Scenario C: "The distribution compressed"**
+- P10–P30: -1 to -2 days (slight improvement)
+- P40–P60: -3 to -4 days (moderate improvement)
+- P70–P90: -5 to -10 days (biggest improvement)
+
+**Diagnosis**: You reduced variability. The tail compressed toward the median. This is flow nirvana—predictable delivery, fewer surprises, less risk. The median tells you there was improvement, but the shift function tells you *how* improvement happened: by making the system less chaotic.
+
+**Scenario D: "Hidden regression"**
+- P10–P50: -8 to -10 days (massive improvement)
+- P60–P70: -3 to -4 days (moderate improvement)
+- P80–P90: +2 to +5 days (regression)
+
+**Diagnosis**: You sped up bulk work but created a new problem in the tail. Maybe you rushed items through but left complex work to languish. The median celebrates the win. The shift function warns you about emerging risk.
+
+**4) Validate with confidence intervals**
+
+Bootstrap the shift function to get 95% CIs for each percentile
+
+Single samples lie. Bootstrap resampling gives you confidence intervals. If the CI crosses zero at a given percentile, that difference isn't reliable—it could be noise. Focus on percentiles where the CI is entirely above or below zero. Those are the real signals.
+
+**5) Decide what to do next**
+
+If the tail didn't improve (or regressed), focus there. If the median improved but the tail exploded, you have a new bottleneck. If everything compressed, institutionalize what you did.
+
+The shift function doesn't just tell you *whether* you improved—it tells you **what to optimize next**. Don't celebrate median improvements if the tail regressed. Don't ignore tail improvements just because the median barely moved. Let the distribution guide your next experiment.
+
+---
+
+# Why gut feel fails (and why data fails too)
+
+Gut feel is based on **recency and salience**. You remember the last disaster, the last argument, the last late delivery. You don't remember the 50 quiet items that shipped on time. Gut feel overweights outliers and underweights patterns. It's directionally useful but quantitatively useless.
+
+So we turn to data. We calculate the median. "Flow time dropped from 10 days to 8 days—we improved by 20%!" But here's what you don't see:
+
+- **P90 went from 30 days to 40 days** (your riskiest work got 33% worse)
+- **P10 went from 2 days to 1 day** (your easiest work got 50% faster)
+- **The median dropped because you shipped way more easy items**, not because hard items got faster
+
+The median isn't lying—it's just **answering a different question than you think you're asking**. You're asking "did we improve?" The median is answering "did the typical item improve?" Those aren't the same question.
+
+Gut feel says "it still feels slow." Data says "we're 20% faster." Both are right. Gut feel is sensing the tail regression. Data is measuring the median improvement. The shift function reconciles them: **you sped up easy work and made hard work worse**.
+
+---
+
+# Instruments to pair with Flow
+
+The shift function works best when you have clean, structured flow data. Here's what you need to make this framework operational.
+
+**Flow Time Data (minimum viable)**  
+Close date + Flow Time (numeric). That's it. Optional: Project, Subdivision, Type for stratified analysis.
+
+You don't need perfect data to start. Just two columns: when did the item finish, and how long did it take. Everything else is optional (but useful). If you have "Project" or "Team" columns, you can run shift functions per project to see which teams improved and which regressed.
+
+**Seasonal Matching (to control for calendar effects)**  
+Compare May–Aug 2023 vs May–Aug 2024, not Q2 2023 vs Q3 2024
+
+Don't compare winter to summer. Don't compare pre-holiday to post-holiday. Seasonal effects are real (vacations, end-of-year crunches, planning cycles). Match the same months year-over-year. If you can't, at least acknowledge the confound.
+
+**Bootstrap Confidence Intervals (to separate signal from noise)**  
+Resample 400–1500 times to get 95% CIs for each percentile difference
+
+Single samples are noisy. Bootstrap resampling quantifies uncertainty. If the CI is wide and crosses zero, you don't have a reliable signal. If the CI is narrow and entirely below zero, you have confident evidence of improvement. This step separates real changes from random fluctuation.
+
+**Per-Project / Per-Team Stratification (to find hidden patterns)**  
+Aggregate shift might look good, but 3 teams improved while 2 regressed—only stratified analysis reveals this
+
+The overall shift function might show improvement, but when you stratify by team, you discover: Team A crushed it (-15 days at P90), Team B made no change, Team C regressed (+8 days at P90). Aggregation hides heterogeneity. Stratification surfaces it.
+
+---
+
+# Outcomes you should expect
+
+What changes when teams adopt this framework?
+
+**Fewer false victories**
+
+Teams stop celebrating median improvements when the tail regressed. They start asking "did we improve *where it matters*?" before declaring success.
+
+**Faster detection of unintended consequences**
+
+When you implement a change, you see immediately if it helped one part of the distribution while hurting another. You catch two-tier systems before they become entrenched.
+
+**Better prioritization of improvement work**
+
+Instead of generic "let's improve flow time" initiatives, you get specific targets: "P85–P95 regressed; we need to focus on bottleneck removal for complex work."
+
+**Reconciliation between gut feel and data**
+
+When someone says "it still feels slow" but the median improved, the shift function shows you both are right: typical items got faster, problem items got slower. Now you can have a real conversation.
+
+**More honest retrospectives**
+
+Teams stop pretending every change was a win. They acknowledge: "We sped up easy work, but we didn't touch the bottleneck. Let's fix that next."
+
+---
+
+# Where it fits
+
+Use alongside flow metrics: flow time shows "we changed"; the shift function shows "where we changed, who benefited, and what risks emerged."
+
+Every flow dashboard should include shift functions. Every improvement retro should plot the distribution before and after. Every executive summary should answer: "Did we improve at P50? At P85? At P90?"
+
+Flow metrics are necessary but not sufficient. They tell you *what* happened. The shift function tells you **where** it happened and **whether it matters**.
+
+If you're running improvement experiments, this framework is your ground truth. Don't trust the median alone. Don't trust gut feel alone. Look at the whole distribution. Let the shift function guide your next move.
+
+---
+
+# Why this pairs perfectly with statistical rigor
+
+This framework isn't just conceptual—it's **computational**. The shift function isn't a metaphor; it's a plot you can generate from your data in minutes.
+
+When you calculate percentile differences and bootstrap confidence intervals, you're not doing statistics for the sake of statistics. You're quantifying uncertainty. You're separating signal from noise. You're making improvement claims falsifiable.
+
+Most "improvement" claims are unfalsifiable. "We're faster now" is vague. "The median dropped 20%" is better, but incomplete. "P10–P50 improved by 15–25%, P60–P80 improved by 5–10%, P85–P95 showed no significant change (95% CI includes zero)" is falsifiable, specific, and actionable.
+
+This is the standard we should hold improvement claims to. Not because we love statistics, but because **vague claims lead to wasted effort**. If you can't see where improvement happened, you can't replicate it. If you can't see where improvement *didn't* happen, you can't fix it.
+
+The shift function makes improvement visible. Bootstrap CIs make improvement honest. Together, they transform performance analysis from storytelling into science.
+
+---
+
+# Getting started
+
+You don't need a PhD in statistics. You don't need custom tooling. You need:
+
+1. A CSV with `Close` (date) and `Flow Time` (numeric)
+2. A tool that plots shift functions with bootstrap CIs ([Shift Happens](https://github.com/chrisgallivan123/shift-happens) does this)
+3. A willingness to ask "where did improvement happen?" instead of "did we improve?"
+
+Start small. Pick one improvement initiative. Compare before vs after. Plot the shift function. Ask the three questions (fast items, typical items, problem items). Share the plot with your team. Discuss what you see.
+
+The framework gets sharper with practice. The first time you run it, you'll spot obvious patterns. The tenth time, you'll catch subtle signals that explain why your last three initiatives didn't scale.
+
+This isn't a replacement for gut feel or medians. It's a **complement**. Gut feel tells you where to look. Medians give you a quick summary. The shift function tells you **what's actually happening**.
+
+Use all three. But when they disagree, trust the shift function. It's the only one that can't lie about where improvement happened—because it shows you the whole distribution, not just one convenient number.
+
+---
+
+If you want to try this on your data, the [Shift Happens tool](https://github.com/chrisgallivan123/shift-happens) is open source and ready to run. Upload your CSV, pick your periods, and see where improvement actually happened. No more guessing. No more false victories. Just honest, distributional truth.
+

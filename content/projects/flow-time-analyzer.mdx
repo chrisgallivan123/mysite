@@ -1,0 +1,21 @@
+---
+title: "Shift Happens"
+excerpt: "Statistical rigor meets production scale. Year-over-year flow time comparison tool with bootstrap confidence intervals, shift functions, and large-dataset safety — built to handle millions of work items without breaking a sweat."
+coverImage: "/shift.png"
+---
+
+# 📊 Shift Happens
+
+The median tells you if the typical item improved. The shift function tells you where improvements happened—whether fast items got faster, whether problem items (P85-P95) got worse, or whether the tail compressed. It transforms "did we improve?" into a nuanced diagnosis of system behavior. Shift Happens brings research-grade statistical methods to flow metrics at scale, with bootstrap confidence intervals, Mann-Whitney tests, rule-based pattern heuristics for plain-English interpretation, and optimizations for datasets with millions of work items.
+
+## Features
+
+- **Shift Function Plots**: Visualize flow time differences across the entire distribution (P10-P90) with bootstrap confidence intervals
+- **Year-over-Year Seasonal Comparison**: Match seasonal windows across years to control for calendar effects
+- **Per-Project & Per-Subdivision Analysis**: Stratify by project, subdivision, or artifact type with search and filtering
+- **Large-Dataset Optimizations**: Fast mode kicks in automatically for datasets >200K rows; handles 5GB files
+
+## 🔗 Repository
+
+Visit the [GitHub repository](https://github.com/chrisgallivan123/shift-happens) for source code, documentation, and installation instructions.
+
