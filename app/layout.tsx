@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Chris Gallivan — AI-First Value Architect',
+  title: 'Chris Gallivan — AI Architect',
   description: 'Building agentic systems that understand flow. Essays, frameworks, and projects on AI-driven delivery intelligence.'
 }
 
@@ -11,7 +11,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <header className="container py-8 flex items-center justify-between">
-          <a href="/" className="font-semibold tracking-tight">Chris Gallivan — AI-First Value Architect</a>
+          <a href="/" className="font-semibold tracking-tight">Chris Gallivan — AI Architect</a>
                   <nav className="flex gap-6 text-sm text-neutral-300">
                     <a href="/ideas">Ideas</a>
                     <a href="/frameworks">Approaches</a>
