@@ -3,7 +3,7 @@ export default function Speaking() {
     <div>
       <h1 className="text-3xl font-semibold">Speaking</h1>
       <p className="mt-4 text-neutral-300">
-        Topics: Flow Metrics and the Why, Context Annotation for 10× Insight, Agentic Pipelines for Delivery.
+        Topics: AI-Powered Delivery Intelligence, Agentic Pipelines, Context Annotation for 10× Insight.
       </p>
       <div className="mt-8 grid gap-6">
         <div className="card">

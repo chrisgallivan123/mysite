@@ -15,7 +15,7 @@ export default function ProjectsIndex() {
   return (
     <div>
       <h1 className="text-3xl font-semibold">Projects</h1>
-      <p className="mt-2 text-neutral-300">AI-powered tools and intelligent systems for flow metrics analysis. From LLM-based validation to statistical rigor at scale.</p>
+      <p className="mt-2 text-neutral-300">AI-powered tools and intelligent systems. From LLM-based validation to statistical rigor at scale.</p>
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
         {items.map(p => (
           <Card key={p.slug} title={p.title} href={`/projects/${p.slug}`} desc={p.excerpt} image={p.coverImage} />

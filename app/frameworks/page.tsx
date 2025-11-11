@@ -14,7 +14,7 @@ export default function FrameworksIndex() {
   return (
     <div>
       <h1 className="text-3xl font-semibold">Approaches</h1>
-      <p className="mt-2 text-neutral-300">Practical frameworks for AI-enabled flow improvement. Real methods, tested at scale.</p>
+      <p className="mt-2 text-neutral-300">Practical frameworks for AI-enabled improvement. Real methods, tested at scale.</p>
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
         {items.map(p => (
           <Card key={p.slug} title={p.title} href={`/frameworks/${p.slug}`} desc={p.excerpt} image={p.coverImage} />
