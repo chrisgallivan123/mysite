@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" font-family="system-ui, -apple-system, sans-serif">
+  <rect width="960" height="540" fill="white"/>
+
+  <!-- Triangle connecting the three conditions -->
+  <polygon points="480,100 200,420 760,420" fill="none" stroke="#8B1A1A" stroke-width="3"/>
+
+  <!-- Convergence point in center -->
+  <circle cx="480" cy="313" r="45" fill="#8B1A1A" opacity="0.12"/>
+  <circle cx="480" cy="313" r="28" fill="#8B1A1A" opacity="0.2"/>
+  <circle cx="480" cy="313" r="12" fill="#8B1A1A"/>
+
+  <!-- Dashed lines from each vertex to center -->
+  <line x1="480" y1="100" x2="480" y2="285" stroke="#8B1A1A" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.4"/>
+  <line x1="200" y1="420" x2="458" y2="325" stroke="#8B1A1A" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.4"/>
+  <line x1="760" y1="420" x2="502" y2="325" stroke="#8B1A1A" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.4"/>
+
+  <!-- Vertex circles -->
+  <circle cx="480" cy="100" r="8" fill="#8B1A1A"/>
+  <circle cx="200" cy="420" r="8" fill="#8B1A1A"/>
+  <circle cx="760" cy="420" r="8" fill="#8B1A1A"/>
+
+  <!-- Labels -->
+  <text x="480" y="72" text-anchor="middle" font-size="22" font-weight="700" fill="#1a1a1a">Proximity</text>
+  <text x="480" y="92" text-anchor="middle" font-size="13" fill="#666">Already near the action</text>
+
+  <text x="130" y="455" text-anchor="middle" font-size="22" font-weight="700" fill="#1a1a1a">Personal</text>
+  <text x="130" y="477" text-anchor="middle" font-size="22" font-weight="700" fill="#1a1a1a">Stake</text>
+  <text x="130" y="497" text-anchor="middle" font-size="13" fill="#666">Owns the outcome</text>
+
+  <text x="830" y="455" text-anchor="middle" font-size="22" font-weight="700" fill="#1a1a1a">Cheap</text>
+  <text x="830" y="477" text-anchor="middle" font-size="22" font-weight="700" fill="#1a1a1a">Action</text>
+  <text x="830" y="497" text-anchor="middle" font-size="13" fill="#666">Low cost from here</text>
+
+  <!-- Center label -->
+  <text x="480" y="370" text-anchor="middle" font-size="15" font-weight="600" fill="#8B1A1A">Triangle</text>
+  <text x="480" y="388" text-anchor="middle" font-size="15" font-weight="600" fill="#8B1A1A">closes</text>
+</svg>
