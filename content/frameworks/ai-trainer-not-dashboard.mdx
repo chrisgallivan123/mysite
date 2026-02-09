@@ -1,0 +1,129 @@
+---
+title: "AI Should Be the Trainer, Not the Dashboard"
+date: "2026-02-09"
+excerpt: "Dashboards show you what's wrong. Nudges fire at the moment when fixing it costs nothing. Three conditions must converge—and AI is the only thing fast enough to detect when they do."
+tags: ["AI", "Approach", "Flow", "Behavior Change"]
+coverImage: "/trainer-cover.png"
+---
+
+# Why this matters
+
+Every organization has a gym membership. Dashboards that show what's wrong. Agents that surface what needs attention. Reports sent to inboxes that never get opened. The information is all there — every metric, every aging item, every risk.
+
+But having a gym membership doesn't change your body.
+
+The assumption behind every dashboard, every metric, every AI-generated insight is the same: if people can *see* the problem, they'll *fix* it. Surface the data, and behavior follows.
+
+It doesn't. This is the gym membership problem. Buying the membership doesn't change your body. What changes your behavior is the trainer who shows up at 6 AM — not because they bring new information, but because they arrive at the *moment* when the action is cheap and the cost of not acting is personal.
+
+AI has been playing the role of the dashboard — and when companies tried to move beyond dashboards, most landed on the AI assistant. A genie in a bottle. Rub the lamp, ask a question, get an answer. It's better than staring at charts, but it's the same fundamental model: *you* go to *it*, *you* ask the right question, at the right time, and hope you remember to act on the answer. The industry got locked into the genie UI — the chat box, the prompt, the magic lamp — without imagining what comes after it.
+
+What comes after it is the trainer. No lamp to rub. The trainer shows up where you already are, at the moment when acting costs nothing.
+
+![Dashboard to Genie to Trainer](/dashboard-genie-trainer.png)
+
+---
+
+# What the trainer knows
+
+A nudge only drives action when three conditions converge. Remove any one and it fails — not partially, completely.
+
+**Proximity** — The person is already near the action. Setting an alarm works at bedtime because the phone is already in your hand. A delivery risk alert works during sprint planning because the team is already deciding what to prioritize. The same alert on a random Tuesday gets ignored — not because the information is wrong, but because the recipient would have to *move* to act on it. Proximity removes movement.
+
+**Personal stake** — The person cares about the outcome. Not abstractly ("quality matters") but concretely ("my name is on this commitment"). An aging report sent to someone who doesn't own the delivery is information. The same report sent to the person whose sprint commitment is at risk is a nudge. Most enterprise nudges fail here — they surface data to people who don't own the consequence.
+
+**Cheap action** — The cost of acting is low *from where they already stand*. Asking a follow-up question costs nothing when you're already on the call. Refactoring a cross-team dependency costs weeks even if everyone agrees it should happen. "Cheap" isn't about the action in theory — it's about the action *right now, from where I'm standing*.
+
+Two out of three isn't enough:
+
+| Missing | What happens | Example |
+|---|---|---|
+| No proximity | Forgotten | "I should follow up on that" — said at 2 PM, forgotten by 5 |
+| No stake | Ignored | Agent delivers insight to inbox — recipient doesn't own the outcome |
+| Not cheap | Stuck | Everyone agrees the architecture needs fixing — requires 3 teams and 6 weeks |
+
+When a Jira ticket sits untouched for five months, it's not because people are lazy. It's because no one with a personal stake was proximate to the action at a moment when acting was cheap. The trainer never showed up.
+
+![Three conditions for a nudge](/trainer-cover.png)
+
+---
+
+# How this extends Attribution Theory
+
+In [Attribution Theory for Teams](/frameworks/attribution-theory-for-teams), I laid out Weiner's framework for understanding *why* outcomes happen and *what's actually changeable*. The three dimensions (Internal/External, Stable/Unstable, Controllable/Uncontrollable) help teams move from blame to behavior.
+
+Attribution Theory answers: **What can we change, and who has the power to change it?**
+
+This piece answers the next question: **When do we ask them?**
+
+Together: identify the controllable cause and the person who can act (Attribution Theory), then deliver the prompt at the exact moment when proximity, stake, and cheap action converge. Without attribution, you nudge randomly. Without timing, you identify the right action and deliver it at the wrong moment.
+
+---
+
+# AI as the trainer
+
+No human can monitor when three conditions simultaneously converge for a specific person on a specific action. But AI can. It sees calendars, work items, ownership data, and communication patterns — all at once, all the time.
+
+A feature shipped six weeks ago. Usage data confirms adoption. No follow-on feature exists. The product manager who owns the roadmap has a planning meeting in two hours.
+
+- **Proximity:** Planning meeting in two hours.
+- **Stake:** The PM owns the roadmap.
+- **Cheap action:** Creating a follow-on epic takes five minutes during the meeting they're already attending.
+
+AI delivers: *"Feature X shipped 6 weeks ago with active usage, but no follow-on work exists. Planning meeting at 2 PM — worth discussing?"*
+
+That same information in a weekly dashboard would be ignored. Delivered two hours before the decision gets made? That's the trainer showing up at the right moment.
+
+The AI doesn't need to understand motivation. It monitors three conditions and fires when they converge. The prompt itself can be simple — it's the timing that makes it powerful.
+
+---
+
+# Start at the center, then widen the circle
+
+Start with actions that *already* satisfy all three conditions — stale commitments before meetings where the committer is attending, aging items before standups, unreviewed PRs when the reviewer has a calendar gap. These aren't hard problems. They're missed opportunities that would resolve themselves if someone remembered at the right moment.
+
+But the real power of AI is its ability to *lower the cost of action* — turning things that were too expensive to nudge on into things that are cheap enough to act on.
+
+Think of nudgeable actions as a circle. At the center are things that are already cheap, proximate, and personal — they just need timing. Each ring outward represents actions that *become* nudgeable as AI reduces the cost.
+
+![Expanding circle of nudgeable actions](/expanding-circle.png)
+
+Before AI, checking delivery risk meant pulling data from three systems and making judgment calls. Nobody does that casually. With AI, the answer arrives pre-computed: *"4 of 12 features are at risk. Here's why."* The action is now: read it, decide whether to escalate. Cheap. Nudgeable.
+
+Following up on a stale commitment meant composing a message, finding the right tone, adding context — ten minutes of cognitive overhead, enough to defer indefinitely. With AI, a draft appears: *"Hey — checking in on X from our last meeting. Any update?"* The action is now: review three sentences, hit send.
+
+AI doesn't change motivation. It changes the cost structure. And when the cost drops low enough, another ring of actions enters the circle. The net widens not because you're nudging on harder things, but because hard things are becoming easier.
+
+---
+
+# What changes
+
+When you start nudging at convergence, three things happen.
+
+**Stale commitments start moving.** When commitments surface at the moment the person is in the room with the person they committed to, follow-through increases — not because people suddenly care more, but because the cost of following up dropped to zero.
+
+**You find the real blockers.** When you nudge on everything that satisfies all three conditions and something *still* doesn't move, you've found a real problem — not a timing issue, not a friction issue, but a motivation or structural issue. The formula becomes a diagnostic: if proximity + stake + cheap action didn't produce movement, something deeper is wrong.
+
+**The actionable surface area expands.** Actions that were too expensive last quarter become cheap this quarter as AI reduces friction. The total surface area of things your organization can act on grows — not because people changed, but because the cost structure changed.
+
+---
+
+# Where it fits
+
+This idea sits between two others I've written about:
+
+- **[Attribution Theory for Teams](/frameworks/attribution-theory-for-teams)** answers what's controllable and who can change it
+- **This piece** answers when to ask — at the convergence of proximity, stake, and cheap action
+- **[Shift Functions](/frameworks/seeing-real-improvement)** answers whether the change actually happened across the full distribution
+
+You don't need all three to start. Start by hand: before your next meeting, check whether anyone on the call owes a commitment or whether there's an aging item the attendees could unblock. Write it on a sticky note. Bring it up.
+
+That's a nudge. No AI required.
+
+Then automate. Let AI check the commitments, scan the aging items, draft the question. Let it deliver the nudge to your meeting prep two minutes before the call.
+
+Then expand. Each cost reduction widens the circle. The conditions stay the same — proximity + personal stake + cheap action. AI just finds the convergence faster and makes more actions cheap enough to qualify.
+
+The gym membership sells access. The trainer sells timing. Every organization already has the membership — the dashboards, the data, the visibility. What they're missing is the trainer: the thing that shows up at the exact moment when the right person can take the right action for almost no cost.
+
+AI should be the trainer.
