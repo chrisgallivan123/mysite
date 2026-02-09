@@ -61,6 +61,20 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
                   em: memo(({children}) => (
                     <em className="text-gray-200 italic">{children}</em>
                   )),
+                  table: memo(({children}) => (
+                    <div className="my-8 max-w-4xl overflow-x-auto">
+                      <table className="w-full border-collapse text-lg">{children}</table>
+                    </div>
+                  )),
+                  thead: memo(({children}) => (
+                    <thead className="border-b-2 border-gray-600">{children}</thead>
+                  )),
+                  th: memo(({children}) => (
+                    <th className="text-left text-white font-bold px-4 py-3">{children}</th>
+                  )),
+                  td: memo(({children}) => (
+                    <td className="text-gray-300 px-4 py-3 border-b border-gray-700/50">{children}</td>
+                  )),
                 }}
               >
                 {section.trim()}
