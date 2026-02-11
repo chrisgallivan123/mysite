@@ -1,88 +1,104 @@
 ---
-title: "The Intervention Triangle: From Information to Action"
-date: "2026-02-09"
-excerpt: "Information doesn't change behavior. Action happens when three conditions converge — proximity, personal stake, and cheap action. Remove any one and nothing moves. AI is the only thing fast enough to detect when all three align."
-tags: ["AI", "Approach", "Flow", "Behavior Change"]
+title: "Every AI Team Shipped a Chat Box. Here's What Comes Next."
+date: "2026-02-11"
+excerpt: "Chat was the obvious first move for AI products. But it has a ceiling. The next generation of AI UI doesn't wait for users to ask — it finds them at the exact moment when action is cheap, personal, and proximate."
+tags: ["AI", "Product Management", "Approach", "Behavior Change"]
 coverImage: "/trainer-cover.png"
 ---
 
-# Why this matters
+# The chat box trap
 
-Every organization already has the information. The dashboards exist. The reports get sent. The agents surface what needs attention. Every metric, every aging item, every risk — it's all there.
+Every AI product team made the same first move: ship a chat box.
 
-Nothing changes.
+It made sense. Chat is familiar. It demos well. Users type a question, the model responds, and the product manager gets to say "we have AI." OpenAI shipped a chat box. Google shipped a chat box. Every enterprise software company rushed to embed one. We did too — we called ours Anvi.
 
-The assumption behind every dashboard, every metric, every AI-generated insight is the same: if people can *see* the problem, they'll *fix* it. Surface the data, and behavior follows.
+![Chat UI — the user asks, the AI answers](/chat-mockup.png)
 
-It doesn't. The problem was never information. It was convergence — three conditions that must align simultaneously before anyone acts.
+Chat works. But it has a ceiling, and every PM who's shipped one has felt it.
 
-AI has been playing the role of the dashboard — and when companies tried to move beyond dashboards, most landed on the AI assistant. A genie in a bottle. Rub the lamp, ask a question, get an answer. It's better than staring at charts, but it's the same fundamental model: *you* go to *it*, *you* ask the right question, at the right time, and hope you remember to act on the answer. The industry got locked into the genie UI — the chat box, the prompt, the magic lamp — without imagining what comes after it.
+The ceiling isn't the model's intelligence. It's the interaction model itself. Chat requires the user to **know what to ask**, **remember to ask it**, and **show up at the right time**. That's three cognitive burdens before any value is delivered. In a consumer app where users are exploring, that's fine. In an enterprise tool where people are drowning in work, it's a problem.
 
-What comes after it is intervention — not more information delivered differently, but the right action surfaced at the moment when all three sides of the triangle align.
-
-![Dashboard to Genie to Trainer](/dashboard-genie-trainer.png)
+The usage pattern is predictable: excited adoption in week one, steady decline by month two, and a dashboard somewhere showing that 15% of users account for 80% of queries. Sound familiar?
 
 ---
 
-# The three sides
+# Three eras of AI UI
 
-An intervention only drives action when three conditions converge. Remove any one and it fails — not partially, completely.
+The industry is moving through three distinct eras of AI interface design. Most products are stuck in the second.
 
-**Proximity** — The person is already near the action. Setting an alarm works at bedtime because the phone is already in your hand. A delivery risk alert works during sprint planning because the team is already deciding what to prioritize. The same alert on a random Tuesday gets ignored — not because the information is wrong, but because the recipient would have to *move* to act on it. Proximity removes movement.
+**Era 1: Dashboard** — You read it. Information is published to a screen and you go look at it. Dashboards assume that seeing the problem leads to fixing it. It doesn't.
+
+**Era 2: Chat / Genie** — You ask it. A big improvement — natural language access to data, no SQL required, answers on demand. But it's still reactive. The user goes to the AI, asks the right question, at the right time, and hopes they remember to act on the answer. The genie is powerful, but only when you rub the lamp.
+
+**Era 3: Nudge / Trainer** — It finds you. The AI detects that conditions are right for a specific action by a specific person and delivers a prompt — not an alert, not a notification, but a contextual intervention at the moment when acting is cheap. The user doesn't have to remember anything. The system remembers for them.
+
+![Dashboard to Genie to Trainer — three eras of AI UI](/dashboard-genie-trainer.png)
+
+Most product teams are shipping Era 2 and calling it innovation. The real unlock is Era 3 — and it requires a completely different design framework.
+
+---
+
+# Why chat hits a ceiling
+
+Chat is reactive. It places three burdens on the user:
+
+**The initiation burden.** The user must decide to open the AI and ask something. In a busy workday, that means competing with meetings, Slack, email, and whatever fire is burning. Most people don't open the chat because they forget it exists, not because it's not useful.
+
+**The formulation burden.** The user must know *what* to ask. "Are there any shipped features without follow-on work?" is a great question — but only someone who already suspects the answer would think to ask it. The users who most need the insight are the ones least likely to formulate the query.
+
+**The timing burden.** Even if the user asks the right question, they might ask it at the wrong time — on a Friday afternoon when the planning meeting was Thursday, or three weeks after the window to act has closed.
+
+Chat optimizes for *users who already know what they need*. That's useful, but it's a small fraction of the potential value. The biggest impact comes from reaching the people who *don't* know they should be asking.
+
+---
+
+# The Intervention Triangle
+
+If chat's ceiling is the user's burden, the design question becomes: what conditions must be true for the AI to take the initiative instead?
+
+The answer is three conditions that must converge simultaneously. Remove any one and the intervention fails — not partially, completely.
+
+**Proximity** — The person is already near the action. A delivery risk alert works during sprint planning because the team is already deciding what to prioritize. The same alert on a random Tuesday gets ignored — not because the information is wrong, but because the recipient would have to *context-switch* to act on it.
 
 **Personal stake** — The person cares about the outcome. Not abstractly ("quality matters") but concretely ("my name is on this commitment"). An aging report sent to someone who doesn't own the delivery is information. The same report sent to the person whose sprint commitment is at risk is a nudge. Most enterprise nudges fail here — they surface data to people who don't own the consequence.
 
-**Cheap action** — The cost of acting is low *from where they already stand*. Asking a follow-up question costs nothing when you're already on the call. Refactoring a cross-team dependency costs weeks even if everyone agrees it should happen. "Cheap" isn't about the action in theory — it's about the action *right now, from where I'm standing*.
+**Cheap action** — The cost of acting is low *from where they already stand*. Adding an item to the meeting agenda takes 30 seconds during pre-meeting prep. Restructuring a cross-team dependency takes weeks even if everyone agrees. "Cheap" isn't about the action in theory — it's about the action *right now, from where I'm standing*.
+
+![Three conditions for a nudge — proximity, personal stake, cheap action](/trainer-cover.png)
 
 Two out of three isn't enough:
 
-| Missing | What happens | Example |
+| Missing | What happens | Product example |
 |---|---|---|
-| No proximity | Forgotten | "I should follow up on that" — said at 2 PM, forgotten by 5 |
-| No stake | Ignored | Agent delivers insight to inbox — recipient doesn't own the outcome |
-| Not cheap | Stuck | Everyone agrees the architecture needs fixing — requires 3 teams and 6 weeks |
+| No proximity | Forgotten | Insight delivered to inbox — user reads it, intends to act, never does |
+| No stake | Ignored | Alert goes to a team channel — nobody owns the specific outcome |
+| Not cheap | Stuck | AI recommends architectural change — correct, but requires 3 teams and 6 weeks |
 
-When a Jira ticket sits untouched for five months, it's not because people are lazy. It's because no one with a personal stake was proximate to the action at a moment when acting was cheap. The triangle never closed.
-
-![Three conditions for a nudge](/trainer-cover.png)
+This is the design spec for nudges. Every PM building AI features should evaluate their interventions against these three sides.
 
 ---
 
-# How this extends Attribution Theory
+# What a nudge looks like in product
 
-In [Attribution Theory for Teams](/frameworks/attribution-theory-for-teams), I laid out Weiner's framework for understanding *why* outcomes happen and *what's actually changeable*. The three dimensions (Internal/External, Stable/Unstable, Controllable/Uncontrollable) help teams move from blame to behavior.
+Here's the same information — "a shipped feature has strong usage but no follow-on work" — delivered two different ways.
 
-Attribution Theory answers: **What can we change, and who has the power to change it?**
+**Via chat (Era 2):** The user opens the AI assistant, asks "are there any shipped features without follow-on work?", gets a good answer, and then... has to remember to bring it up at the right meeting, to the right people, at the right time. The information was correct. The delivery model wasted it.
 
-This piece answers the next question: **When do we ask them?**
+**Via nudge (Era 3):** The feature appears inline in the user's portfolio view, at the exact moment they're preparing for a planning meeting. No question asked. No separate tool opened. The nudge includes the insight *and* the action — one button to add it to the agenda.
 
-Together: identify the controllable cause and the person who can act (Attribution Theory), then deliver the prompt at the exact moment when proximity, stake, and cheap action converge. Without attribution, you nudge randomly. Without convergence, you identify the right action but the triangle never closes.
+![Nudge prototype — contextual, inline, actionable](/nudge-prototype.png)
 
----
+The difference isn't the information. It's the delivery model. The nudge doesn't require the user to know what to ask, remember to ask it, or act at the right time. The system handles all three.
 
-# What AI makes possible
-
-No human can monitor when three conditions simultaneously converge for a specific person on a specific action. But AI can. It sees calendars, work items, ownership data, and communication patterns — all at once, all the time.
-
-A feature shipped six weeks ago. Usage data confirms adoption. No follow-on feature exists. The product manager who owns the roadmap has a planning meeting in two hours.
-
-- **Proximity:** Planning meeting in two hours.
-- **Stake:** The PM owns the roadmap.
-- **Cheap action:** Creating a follow-on epic takes five minutes during the meeting they're already attending.
-
-AI delivers: *"Feature X shipped 6 weeks ago with active usage, but no follow-on work exists. Planning meeting at 2 PM — worth discussing?"*
-
-That same information in a weekly dashboard would be ignored. Delivered when all three sides align? That's the triangle closing. Same information, different conditions, completely different outcome.
-
-The AI doesn't need to understand motivation. It monitors three sides of the triangle and fires when they converge. The prompt itself can be simple — it's the convergence that makes it powerful.
+Notice what the nudge *isn't*: it's not a notification badge, not a modal popup, not an email digest. It's an inline card that appears *in the workflow the user is already performing*. This is a critical design choice — nudges that pull users out of their current context are just notifications with better copy.
 
 ---
 
-# Start at the center, then widen the circle
+# The expanding circle
 
-Start with actions that *already* satisfy all three conditions — stale commitments before meetings where the committer is attending, aging items before standups, unreviewed PRs when the reviewer has a calendar gap. These aren't hard problems. They're missed opportunities that would resolve themselves if someone remembered at the right moment.
+Start with actions that *already* satisfy all three conditions — stale commitments before meetings, aging items before standups, unreviewed PRs when the reviewer has a calendar gap. These aren't hard problems. They're missed opportunities that would resolve themselves if someone remembered at the right moment.
 
-But the real power of AI is its ability to *lower the cost of action* — turning things that were too expensive to nudge on into things that are cheap enough to act on.
+But the real power is that AI *lowers the cost of action* — turning things that were too expensive to nudge on into things that are cheap enough to act on.
 
 Think of nudgeable actions as a circle. At the center are things that are already cheap, proximate, and personal — they just need timing. Each ring outward represents actions that *become* nudgeable as AI reduces the cost.
 
@@ -90,40 +106,52 @@ Think of nudgeable actions as a circle. At the center are things that are alread
 
 Before AI, checking delivery risk meant pulling data from three systems and making judgment calls. Nobody does that casually. With AI, the answer arrives pre-computed: *"4 of 12 features are at risk. Here's why."* The action is now: read it, decide whether to escalate. Cheap. Nudgeable.
 
-Following up on a stale commitment meant composing a message, finding the right tone, adding context — ten minutes of cognitive overhead, enough to defer indefinitely. With AI, a draft appears: *"Hey — checking in on X from our last meeting. Any update?"* The action is now: review three sentences, hit send.
+Following up on a stale commitment meant composing a message, finding the right tone, adding context. With AI, a draft appears: *"Checking in on X from our last meeting. Any update?"* The action is now: review three sentences, hit send.
 
-AI doesn't change motivation. It changes the cost structure. And when the cost drops low enough, another ring of actions enters the circle. The net widens not because you're nudging on harder things, but because hard things are becoming easier.
-
----
-
-# What changes
-
-When you start nudging at convergence, three things happen.
-
-**Stale commitments start moving.** When commitments surface at the moment the person is in the room with the person they committed to, follow-through increases — not because people suddenly care more, but because the cost of following up dropped to zero.
-
-**You find the real blockers.** When you nudge on everything that satisfies all three conditions and something *still* doesn't move, you've found a real problem — not a timing issue, not a friction issue, but a motivation or structural issue. The formula becomes a diagnostic: if proximity + stake + cheap action didn't produce movement, something deeper is wrong.
-
-**The actionable surface area expands.** Actions that were too expensive last quarter become cheap this quarter as AI reduces friction. The total surface area of things your organization can act on grows — not because people changed, but because the cost structure changed.
+AI doesn't change motivation. It changes the cost structure. And when the cost drops low enough, another ring of actions enters the circle.
 
 ---
 
-# Where it fits
+# How to design nudges: a PM playbook
 
-This idea sits between two others I've written about:
+If you're building AI features and want to move from Era 2 to Era 3, here's where to start.
 
-- **[Attribution Theory for Teams](/frameworks/attribution-theory-for-teams)** answers what's controllable and who can change it
-- **The Intervention Triangle** answers when to act — at the convergence of proximity, stake, and cheap action
-- **[Shift Functions](/frameworks/seeing-real-improvement)** answers whether the change actually happened across the full distribution
+**1. Find the triangle in your product.** Map where proximity, personal stake, and cheap action already converge. Look for moments where users are already in the tool, already looking at something they own, and the next action is small. These are your first nudge candidates — they need timing, not new capabilities.
 
-You don't need all three to start. Start by hand: before your next meeting, check whether anyone on the call owes a commitment or whether there's an aging item the attendees could unblock. Write it on a sticky note. Bring it up.
+**2. Start at the center of the circle.** Don't try to nudge on complex, multi-step actions first. Start with the cheapest actions: adding an item to an agenda, acknowledging a risk, reviewing a draft. These are high-conversion, low-risk, and they build user trust in the nudge system.
 
-That's a nudge. No AI required.
+**3. Deliver inline, not interstitial.** Nudges should appear *within* the user's current workflow, not pull them out of it. A nudge in a portfolio view is an intervention. A nudge in a notification center is just another alert. The difference is proximity.
 
-Then automate. Let AI check the commitments, scan the aging items, draft the question. Let it deliver the nudge to your meeting prep two minutes before the call.
+**4. Include the action, not just the insight.** A nudge that says "Feature X has no follow-on work" is information. A nudge that says "Feature X has no follow-on work — add to today's agenda?" is an intervention. The action button is the difference between an alert and a nudge.
 
-Then expand. Each cost reduction widens the circle. The conditions stay the same — proximity + personal stake + cheap action. AI just finds the convergence faster and makes more actions cheap enough to qualify.
+**5. Measure action rate, not impression rate.** Dashboards measure views. Chat measures queries. Nudges should measure *actions taken*. If your nudge is seen 100 times and acted on 5 times, the nudge is failing — either the timing, the stake, or the cost is wrong. The triangle tells you which side to fix.
 
-Every organization already has the information — the dashboards, the data, the visibility. What they're missing is convergence: the right person, already near the action, at the moment when acting costs almost nothing.
+**6. Expand the circle deliberately.** Once your first nudges are working (30%+ action rate), look for the next ring — actions that *would* be nudgeable if the cost were lower. Then use AI to reduce the cost: pre-compute analysis, draft messages, pre-fill forms. Each cost reduction widens the circle of what's actionable.
 
-Three sides. One triangle. AI closes it.
+---
+
+# What changes when you ship nudges
+
+Three things happen when you move from chat to nudges.
+
+**Adoption stops declining.** Chat usage follows a decay curve because it depends on user memory and motivation. Nudges don't — they fire when conditions are right regardless of whether the user remembers. The usage pattern shifts from "users who seek out AI" to "users whose workflow includes AI."
+
+**You find the real blockers.** When you nudge on everything that satisfies all three conditions and something *still* doesn't move, you've found a real problem — not a timing issue, not a friction issue, but a structural or motivational issue that no UI can fix. The triangle becomes a diagnostic tool.
+
+**Your AI becomes a trainer, not a tool.** Over time, users start anticipating the nudge — checking their portfolio before the planning meeting because they've learned that's where the opportunities are. The AI shapes habits, not just answers. That's the difference between a tool you use and a system that makes you better.
+
+---
+
+# Where to start
+
+You don't need to build a nudge system to test this. Start by hand.
+
+Before your next planning meeting, check: is there a shipped feature with strong usage and no follow-on work? Is there an aging item that someone on the call could unblock? Write it on a sticky note. Bring it up at the meeting.
+
+That's a nudge. You just closed the triangle manually — proximity (the meeting), stake (the owner is in the room), cheap action (bringing it up costs nothing).
+
+Then automate. Let AI check the conditions, find the convergence, deliver the prompt. Let it appear inline, at the right moment, with the action attached.
+
+Every AI team shipped a chat box. The ones that figure out nudges will ship something that actually changes behavior.
+
+Three sides. One triangle. The AI doesn't answer questions — it closes the loop.

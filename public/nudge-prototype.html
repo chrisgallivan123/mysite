@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Dashboard — Nudge View</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f6f8; color: #1a1a2e; }
+
+  /* Layout */
+  .app { display: flex; height: 100vh; }
+  .sidebar { width: 220px; background: #1a1a2e; color: #fff; padding: 24px 0; flex-shrink: 0; }
+  .sidebar-brand { padding: 0 20px 24px; font-size: 18px; font-weight: 700; letter-spacing: -0.5px; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 16px; }
+  .sidebar-brand span { color: #6c8cff; }
+  .sidebar-section { padding: 8px 20px; font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px; color: rgba(255,255,255,0.35); margin-top: 12px; }
+  .sidebar-item { display: flex; align-items: center; gap: 10px; padding: 10px 20px; font-size: 13px; color: rgba(255,255,255,0.6); cursor: pointer; transition: all 0.15s; }
+  .sidebar-item:hover { background: rgba(255,255,255,0.05); color: #fff; }
+  .sidebar-item.active { background: rgba(108,140,255,0.12); color: #6c8cff; border-right: 3px solid #6c8cff; }
+  .sidebar-icon { width: 18px; height: 18px; opacity: 0.5; }
+  .sidebar-item.active .sidebar-icon { opacity: 1; }
+
+  .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+  /* Header */
+  .header { background: #fff; border-bottom: 1px solid #e2e5eb; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; }
+  .header-left { display: flex; align-items: center; gap: 16px; }
+  .header-title { font-size: 20px; font-weight: 600; }
+  .header-subtitle { font-size: 13px; color: #6b7280; }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .header-btn { padding: 7px 14px; border-radius: 6px; font-size: 13px; border: 1px solid #e2e5eb; background: #fff; color: #374151; cursor: pointer; }
+  .header-btn:hover { background: #f9fafb; }
+  .avatar { width: 32px; height: 32px; border-radius: 50%; background: #6c8cff; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; }
+
+  /* Content */
+  .content { flex: 1; overflow-y: auto; padding: 24px 32px; }
+
+  /* Summary cards */
+  .summary-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+  .summary-card { background: #fff; border-radius: 10px; padding: 18px 20px; border: 1px solid #e2e5eb; }
+  .summary-label { font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .summary-value { font-size: 26px; font-weight: 700; }
+  .summary-value.green { color: #059669; }
+  .summary-value.amber { color: #d97706; }
+  .summary-value.red { color: #dc2626; }
+  .summary-value.blue { color: #2563eb; }
+  .summary-sub { font-size: 12px; color: #9ca3af; margin-top: 2px; }
+
+  /* Table */
+  .table-card { background: #fff; border-radius: 10px; border: 1px solid #e2e5eb; overflow: hidden; }
+  .table-header { padding: 16px 20px; border-bottom: 1px solid #e2e5eb; display: flex; align-items: center; justify-content: space-between; }
+  .table-title { font-size: 15px; font-weight: 600; }
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; padding: 10px 20px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: #6b7280; border-bottom: 1px solid #e2e5eb; background: #f9fafb; font-weight: 600; }
+  td { padding: 14px 20px; font-size: 13px; border-bottom: 1px solid #f3f4f6; }
+  tr:last-child td { border-bottom: none; }
+  .feature-name { font-weight: 500; color: #1a1a2e; }
+  .status-badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+  .status-shipped { background: #ecfdf5; color: #059669; }
+  .status-progress { background: #eff6ff; color: #2563eb; }
+  .status-risk { background: #fef2f2; color: #dc2626; }
+  .status-planned { background: #f5f3ff; color: #7c3aed; }
+  .flow-time { font-variant-numeric: tabular-nums; color: #374151; }
+  .usage-bar { width: 80px; height: 6px; background: #e5e7eb; border-radius: 3px; overflow: hidden; display: inline-block; vertical-align: middle; margin-right: 8px; }
+  .usage-fill { height: 100%; border-radius: 3px; background: #6c8cff; }
+  .usage-text { font-size: 12px; color: #6b7280; }
+
+  /* NUDGE CARD — the star of the show */
+  .nudge-card { margin: -1px 0; background: linear-gradient(135deg, #fefce8 0%, #fef9e7 100%); border-left: 4px solid #eab308; padding: 16px 20px; display: flex; align-items: flex-start; gap: 14px; }
+  .nudge-icon-wrap { width: 34px; height: 34px; background: #fef08a; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .nudge-icon { font-size: 18px; }
+  .nudge-body { flex: 1; }
+  .nudge-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #a16207; font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+  .nudge-label-dot { width: 6px; height: 6px; background: #eab308; border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .nudge-text { font-size: 13px; color: #1a1a2e; line-height: 1.5; }
+  .nudge-text strong { font-weight: 600; }
+  .nudge-actions { display: flex; gap: 8px; margin-top: 10px; }
+  .nudge-btn { padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 500; cursor: pointer; border: none; transition: all 0.15s; }
+  .nudge-btn-primary { background: #1a1a2e; color: #fff; }
+  .nudge-btn-primary:hover { background: #2d2d4e; }
+  .nudge-btn-secondary { background: transparent; color: #6b7280; border: 1px solid #d1d5db; }
+  .nudge-btn-secondary:hover { background: #f9fafb; }
+  .nudge-meta { font-size: 11px; color: #9ca3af; margin-top: 6px; }
+
+  /* Responsive tightening for screenshot */
+  @media (max-width: 1200px) {
+    .summary-row { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-brand">Portfolio<span>Viz</span></div>
+    <div class="sidebar-section">Portfolios</div>
+    <div class="sidebar-item active">
+      <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Digital Banking
+    </div>
+    <div class="sidebar-item">
+      <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Mobile Platform
+    </div>
+    <div class="sidebar-item">
+      <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      API Gateway
+    </div>
+    <div class="sidebar-section">Views</div>
+    <div class="sidebar-item">
+      <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>
+      Flow Metrics
+    </div>
+    <div class="sidebar-item">
+      <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l4 4"/></svg>
+      Aging
+    </div>
+    <div class="sidebar-item">
+      <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+      Distribution
+    </div>
+    <div class="sidebar-section">Settings</div>
+    <div class="sidebar-item">
+      <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      Configuration
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="main">
+    <div class="header">
+      <div class="header-left">
+        <div>
+          <div class="header-title">Digital Banking Portfolio</div>
+          <div class="header-subtitle">Q1 2026 &middot; 12 features &middot; 4 value streams</div>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="header-btn">Export</div>
+        <div class="header-btn">Filters</div>
+        <div class="avatar">CG</div>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- Summary cards -->
+      <div class="summary-row">
+        <div class="summary-card">
+          <div class="summary-label">Features Shipped</div>
+          <div class="summary-value green">7</div>
+          <div class="summary-sub">of 12 planned</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-label">Avg Flow Time</div>
+          <div class="summary-value blue">34d</div>
+          <div class="summary-sub">down from 41d last quarter</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-label">At Risk</div>
+          <div class="summary-value amber">2</div>
+          <div class="summary-sub">aging &gt; 60 days</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-label">WIP</div>
+          <div class="summary-value red">5</div>
+          <div class="summary-sub">above target of 3</div>
+        </div>
+      </div>
+
+      <!-- Feature table with inline nudge -->
+      <div class="table-card">
+        <div class="table-header">
+          <div class="table-title">Features</div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Status</th>
+              <th>Flow Time</th>
+              <th>Usage (30d)</th>
+              <th>Owner</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="feature-name">Instant Balance Alerts</td>
+              <td><span class="status-badge status-shipped">Shipped</span></td>
+              <td class="flow-time">28d</td>
+              <td>
+                <span class="usage-bar"><span class="usage-fill" style="width:85%"></span></span>
+                <span class="usage-text">85%</span>
+              </td>
+              <td>M. Chen</td>
+            </tr>
+            <tr>
+              <td class="feature-name">Predictive Cash Flow</td>
+              <td><span class="status-badge status-shipped">Shipped</span></td>
+              <td class="flow-time">42d</td>
+              <td>
+                <span class="usage-bar"><span class="usage-fill" style="width:72%"></span></span>
+                <span class="usage-text">72%</span>
+              </td>
+              <td>S. Park</td>
+            </tr>
+
+            <!-- NUDGE ROW — inline, contextual -->
+            <tr>
+              <td colspan="5" style="padding: 0;">
+                <div class="nudge-card">
+                  <div class="nudge-icon-wrap">
+                    <span class="nudge-icon">&#9889;</span>
+                  </div>
+                  <div class="nudge-body">
+                    <div class="nudge-label"><span class="nudge-label-dot"></span> Nudge</div>
+                    <div class="nudge-text">
+                      <strong>Predictive Cash Flow</strong> shipped 6 weeks ago with 72% adoption and no follow-on work planned. Your planning meeting is at 2 PM — worth adding to the agenda?
+                    </div>
+                    <div class="nudge-actions">
+                      <button class="nudge-btn nudge-btn-primary">Add to agenda</button>
+                      <button class="nudge-btn nudge-btn-secondary">Dismiss</button>
+                    </div>
+                    <div class="nudge-meta">Proximity: planning meeting in 2h &middot; Stake: you own this roadmap &middot; Action: 30 sec</div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="feature-name">Biometric Auth Upgrade</td>
+              <td><span class="status-badge status-progress">In Progress</span></td>
+              <td class="flow-time">67d</td>
+              <td>
+                <span class="usage-bar"><span class="usage-fill" style="width:0%"></span></span>
+                <span class="usage-text">—</span>
+              </td>
+              <td>A. Rivera</td>
+            </tr>
+            <tr>
+              <td class="feature-name">Smart Categorization</td>
+              <td><span class="status-badge status-risk">At Risk</span></td>
+              <td class="flow-time">83d</td>
+              <td>
+                <span class="usage-bar"><span class="usage-fill" style="width:0%"></span></span>
+                <span class="usage-text">—</span>
+              </td>
+              <td>J. Williams</td>
+            </tr>
+            <tr>
+              <td class="feature-name">Cross-Account Transfers v2</td>
+              <td><span class="status-badge status-progress">In Progress</span></td>
+              <td class="flow-time">31d</td>
+              <td>
+                <span class="usage-bar"><span class="usage-fill" style="width:0%"></span></span>
+                <span class="usage-text">—</span>
+              </td>
+              <td>M. Chen</td>
+            </tr>
+            <tr>
+              <td class="feature-name">Merchant Insights</td>
+              <td><span class="status-badge status-planned">Planned</span></td>
+              <td class="flow-time">—</td>
+              <td>
+                <span class="usage-bar"><span class="usage-fill" style="width:0%"></span></span>
+                <span class="usage-text">—</span>
+              </td>
+              <td>S. Park</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
